@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Mahartney/Project-3#readme",
   "dependencies": {
+    "apac": "^1.0.0",
     "body-parser": "^1.14.1",
     "express": "^4.13.3",
     "hbs": "^4.0.0",
