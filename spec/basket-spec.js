@@ -1,20 +1,15 @@
-
-describe("basket", function(){
+describe("a basket", function(){
 
   it ("should have a budget", function(){
-    //expect a basket to have a budget
-    avar budget = 10
+
     expect(budget).toBeGreaterThan(0);
 
-    //var basket = 10
-    //var basket = 10
-    //expect(basket).toBeGreaterThan(0);
   })
 
   it ("should have a collection of items", function(){
     //expect a collection to have at least 1 item
-    expect(budget).toBeGreaterThan(12);
-    //expect(basket.items.length).toBeGreaterThan(0);
+
+    expect(basket.items.length).toBeGreaterThan(0);
   })
 
   it ("should have a value", function(){
