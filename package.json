@@ -1,0 +1,24 @@
+{
+  "name": "basket_case",
+  "version": "1.0.0",
+  "description": "A whimsical application to offer gift ideas",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mahartney/Project-3.git"
+  },
+  "author": "Negar, Peter, Davis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mahartney/Project-3/issues"
+  },
+  "homepage": "https://github.com/Mahartney/Project-3#readme",
+  "dependencies": {
+    "body-parser": "^1.14.1",
+    "express": "^4.13.3",
+    "hbs": "^4.0.0"
+  }
+}
