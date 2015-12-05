@@ -6,6 +6,15 @@
   <body>
     <header>
       <h1>BasketCase</h1>
+      <ul>
+            {{#if currentUser}}
+              <li><a href="/logout">Logout {{currentUser.local.email}}</a></li<a>
+              <li><a href="/secret"> secret page </a></li>
+            {{else}}
+              <li><a href="/login">Login</a></li>
+              <li><a href="/signup">Signup</a></li>
+            {{/if}}
+          </ul>
     </header>
    {{{body}}}
   </body>
