@@ -13,7 +13,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(methodOverride('_method'));
 
-
 app.get('/', function(req, res){
   res.render('index.hbs');
 });
