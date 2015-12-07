@@ -13,10 +13,12 @@ var flash = require('connect-flash');
 var cookieParser = require('cookie-parser');
 var session      = require('express-session');
 var methodOverride = require('method-override')
+
 var usersController = require('./controllers/usersController')
+var basketController = require('./controllers/basketController')
 app.set('view engine', 'hbs');
 
-mongoose.connect('mongodb://localhost/basketcase');
+// mongoose.connect('mongodb://localhost/basketcase');
 
 app.use(express.static(path.join(__dirname, '/public')));
 app.use(bodyParser.json());
@@ -51,6 +53,8 @@ app.get('/login', usersController.getLogin);
 app.post('/login', usersController.postLogin);
 app.get('/logout', usersController.getLogout);
 app.get('/secret', usersController.getSecret);
+
+app.get('/baskets', basketController.getBaskets);
 
 app.get("/:format?", function(req, res, next){
   console.log(req.params)
