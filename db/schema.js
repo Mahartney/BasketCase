@@ -1,8 +1,8 @@
 var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/basketcase');
 
-//mongoose.connect('mongodb://localhost/basketcase');
-
-var Schema = mongoose.Schema, ObjectId = Schema.Types.ObjectId
+var Schema = mongoose.Schema,
+    ObjectId = Schema.Types.ObjectId
 
 
 //define schema for item
