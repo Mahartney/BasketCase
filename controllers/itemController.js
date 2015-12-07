@@ -10,16 +10,15 @@ function error(response, message){
 
 var itemController = {
   createItem: function(req, res){
-    Item.create({
+    var item = new Item({
       name: "nothing",
       price: 0,
       thumbnail: "",
       image: "",
       description: "something for nothing"
-    }, function(err, docs){
-      console.log(err);
-      console.log(docs);
-    })
+    });
+    item.save();
+    return item;
   }
 }
 

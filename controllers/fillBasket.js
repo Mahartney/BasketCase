@@ -8,9 +8,9 @@ var itemController = require("./itemController")
 var fillBasket = function(){
   var basket = basketController.createBasket();
   var item = itemController.createItem();
-  console.log(basket);
-  console.log(item)
-  // basket.items.push(item.name)
+  console.log("this is from the fillbasket file " + basket);
+  console.log("similarly this item " + item)
+  basket.items.push(item.id)
   return basket;
 }
 

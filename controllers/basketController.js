@@ -16,21 +16,20 @@ var basketController = {
   },
 
   createBasket: function(req, res){
-    Basket.create({
+    var myBasket = new Basket({
       //budget: initialize to 0
       //value: initialize to 0
       //created on: default(?)
       //liked: set to false by default
       //items: []
-      budget: 0,
+      budget: 5,
       value: 0,
       liked: false,
       items: [],
-    }, function(err, docs){
-      console.log(err);
-      console.log(docs);
-      return docs;
-    });
+    })
+
+    myBasket.save();
+    return myBasket;
   }
 }
 
