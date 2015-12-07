@@ -8,10 +8,4 @@ function error(response, message){
   response.json({error: message})
 }
 
-app.get("/", function(req, res){
-  Basket.find({}).populate("items").then(function(baskets){
-    res.json(baskets);
-  });
-});
-
 module.export = app

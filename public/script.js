@@ -17,7 +17,7 @@ $(document).ready(function(){
     console.log(numItemsArr)
     console.log(numItemsSum)
     for (var i = 0; i < numItemsArr.length; i++) {
-      shopFor.push(Math.floor(numItemsArr[i]/numItemsSum*value))
+      shopFor.push(Math.round(numItemsArr[i]/numItemsSum*value))
     }
     console.log(shopFor.reduce((a,b) => a+b))
     alert(shopFor)

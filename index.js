@@ -5,7 +5,7 @@ var path = require('path');
 var apac = require('apac');
 
 var Basket = require("./models/basket");
-var Song = require("./models/item");
+var Item = require("./models/item");
 
 var mongoose = require('mongoose');
 var passport = require('passport');
@@ -34,10 +34,6 @@ app.use(function(req, res, next){
   next();
 });
 
-app.get('/', function(req, res){
-  res.render('index');
-});
-
 function authenticatedUser(req, res, next){
   if(req.isAuthenticated()){
     return next()
@@ -53,11 +49,10 @@ app.get('/logout', usersController.getLogout);
 app.get('/secret', usersController.getSecret);
 
 app.get("/:format?", function(req, res, next){
-  console.log(req.params)
-  if (req.params.format == 'json') {
+  if (req.params.format == '.json') {
     Basket.find({}).populate("items").then(function(baskets){
-  });
-    res.render('index.hbs');
+      res.json(baskets);
+    })
   } else {
     res.render('index.hbs');
   }

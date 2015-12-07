@@ -8,15 +8,15 @@ var Basket= function(info){
 };
 
 Basket.fetch = function(){
-  var request = $.getJSON("http://localhost:3000/")
+  var request = $.getJSON("http://localhost:3000/.json")
   .then(function(response) {
-    console.log(response)
     var baskets = [];
     for(var i = 0; i < response.length; i++){
       baskets.push(new Basket(response[i]));
     }
-    return baskets;
+    console.log("Test")
     console.log(baskets)
+    return baskets;
     })
   .fail(function(response){
       console.log(response);
