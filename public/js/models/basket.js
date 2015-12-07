@@ -30,18 +30,14 @@ popMostRecent = function(){
     for(var i = 0; i < response.length; i++){
       baskets.push(new Basket(response[i]));
     }
+    $(".mostRecent").empty();
     for (var i = 0; i < baskets.length; i++) {
       $(".mostRecent").append("<div>"+baskets[i].items[0].description+"</div>")
-    }
+    };
     })
   .fail(function(response){
       console.log("2");
     });
   return request;
-
-
-  for (var i = 0; i < baskets.length; i++) {
-    $(".mostRecent").append("<div>YAY</div>")
-  }
 
 }
