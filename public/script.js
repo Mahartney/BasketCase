@@ -23,6 +23,4 @@ $(document).ready(function(){
     alert(shopFor)
   })
 
-  console.log(Basket.fetch())
-
 });

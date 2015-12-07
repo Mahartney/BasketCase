@@ -14,12 +14,34 @@ Basket.fetch = function(){
     for(var i = 0; i < response.length; i++){
       baskets.push(new Basket(response[i]));
     }
-    console.log("Test")
     console.log(baskets)
     return baskets;
     })
   .fail(function(response){
-      console.log(response);
+      console.log("2");
     });
   return request;
 };
+
+popMostRecent = function(){
+  var request = $.getJSON("http://localhost:3000/.json")
+  .then(function(response) {
+    var baskets = [];
+    for(var i = 0; i < response.length; i++){
+      baskets.push(new Basket(response[i]));
+    }
+    for (var i = 0; i < baskets.length; i++) {
+      $(".mostRecent").append("<div>"+baskets[i].items[0].description+"</div>")
+    }
+    })
+  .fail(function(response){
+      console.log("2");
+    });
+  return request;
+
+
+  for (var i = 0; i < baskets.length; i++) {
+    $(".mostRecent").append("<div>YAY</div>")
+  }
+
+}
