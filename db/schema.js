@@ -2,11 +2,12 @@ var mongoose = require('mongoose');
 
 //mongoose.connect('mongodb://localhost/basketcase');
 
-var Schema = mongoose.Schema, ObjectId = Schema.ObjectId
+var Schema = mongoose.Schema, ObjectId = Schema.Types.ObjectId
 
 
 //define schema for item
 var ItemSchema = new Schema({
+    name: String,
     price: Number,
     thumbnail: String,
     image: String,
@@ -19,7 +20,7 @@ var BasketSchema = new Schema({
     value: Number,
     created_on: String,
     liked: Boolean,
-    items: [ItemSchema],
+    items: [{type: ObjectId, ref:" Item"}]
   });
 
 var BasketModel = mongoose.model("Basket", BasketSchema)
