@@ -7,13 +7,21 @@ $(document).ready(function(){
   $(".shop").click( function(){
     var shopFor =[]
     var value = this.value
-    while (value>0) {
-      var tempValue = Math.max(1,Math.floor(Math.random()*value))
-      value = value - tempValue
-      shopFor.push(tempValue)
+    var numItems = Math.floor(Math.random()*5)+1
+    var numItemsArr = []
+    for (var i = 0; i < numItems; i++) {
+        var itemAmt = Math.floor(Math.random()*100)+1
+        numItemsArr.push(itemAmt)
     }
-    shop(shopFor)
-    });
+    var numItemsSum = numItemsArr.reduce((a,b) => a+b)
+    console.log(numItemsArr)
+    console.log(numItemsSum)
+    for (var i = 0; i < numItemsArr.length; i++) {
+      shopFor.push(Math.floor(numItemsArr[i]/numItemsSum*value))
+    }
+    console.log(shopFor.reduce((a,b) => a+b))
+    alert(shopFor)
+  })
 
   console.log(Basket.fetch())
 
