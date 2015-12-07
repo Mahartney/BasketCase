@@ -11,7 +11,6 @@ describe("a basket", function(){
     expect(budget).toBeGreaterThan(0);
   })
 
-
   it ("should have a value", function(){
     //expect a basket to have a $ value
     expect(basket.value).toBeGreaterThan(0);
