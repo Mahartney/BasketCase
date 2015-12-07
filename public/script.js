@@ -7,7 +7,7 @@ $(document).ready(function(){
   $(".shop").click( function(){
     var shopFor =[]
     var value = this.value
-    while (value>1) {
+    while (value>0) {
       var tempValue = Math.max(1,Math.floor(Math.random()*value))
       value = value - tempValue
       shopFor.push(tempValue)
@@ -15,6 +15,6 @@ $(document).ready(function(){
     shop(shopFor)
     });
 
-
+  console.log(Basket.fetch())
 
 });
