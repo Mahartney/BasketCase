@@ -7,7 +7,7 @@ var usersController = {
     });
   },
 
-   postSignup: function(req, res){
+  postSignup: function(req, res){
     var signupStrategy = passport.authenticate('local-signup', {
       successRedirect: '/',
       failureRedirect: '/signup',
@@ -16,11 +16,11 @@ var usersController = {
     return signupStrategy(req, res);
   },
 
-   getLogin: function(req, res){
+  getLogin: function(req, res){
     res.render('login.hbs', {message: req.flash('loginMessage')})
   },
 
-   postLogin: function(req, res){
+  postLogin: function(req, res){
     var loginStrategy = passport.authenticate('local-login', {
       successRedirect: '/',
       failureRedirect: '/login',
@@ -29,9 +29,13 @@ var usersController = {
     return loginStrategy(req, res);
   },
 
-   getLogout: function(req, res){
+  getLogout: function(req, res){
     req.logout();
     res.redirect('/');
+  },
+
+  getSecret: function(req, res){
+    res.render('secret.hbs')
   }
 }
 

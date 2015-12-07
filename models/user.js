@@ -12,7 +12,7 @@ User.methods.encrypt = function(password){
   return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 };
 
-User.method.validPassword = function(password){
+User.methods.validPassword = function(password){
   return bcrypt.compareSync(password, this.local.password);
 }
 
