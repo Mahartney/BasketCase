@@ -25,15 +25,14 @@ app.use(passport.session());
 app.use(flash());
 require('./config/passport')(passport);
 
-app.get('/', function(req, res){
-  res.render('index.hbs');
-});
-
 app.use(function(req, res, next){
-  global.currentUser = req.user;
   res.locals.currentUser = req.user
   next();
 })
+
+app.get('/', function(req, res){
+  res.render('index');
+});
 
 function authenticatedUser(req, res, next){
   if(req.isAuthenticated()){
