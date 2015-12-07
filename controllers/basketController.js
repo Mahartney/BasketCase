@@ -13,6 +13,24 @@ var basketController = {
   Basket.find({}).then(function(baskets){
     res.json(baskets);
   });
+  },
+
+  createBasket: function(req, res){
+    Basket.create({
+      //budget: initialize to 0
+      //value: initialize to 0
+      //created on: default(?)
+      //liked: set to false by default
+      //items: []
+      budget: 0,
+      value: 0,
+      liked: false,
+      items: [],
+    }, function(err, docs){
+      console.log(err);
+      console.log(docs);
+      return docs;
+    });
   }
 }
 

@@ -16,6 +16,7 @@ var methodOverride = require('method-override')
 
 var usersController = require('./controllers/usersController')
 var basketController = require('./controllers/basketController')
+var fillBasket = require('./controllers/fillBasket')
 app.set('view engine', 'hbs');
 
 // mongoose.connect('mongodb://localhost/basketcase');
@@ -56,16 +57,18 @@ app.get('/secret', usersController.getSecret);
 
 app.get('/baskets', basketController.getBaskets);
 
-app.get("/:format?", function(req, res, next){
-  console.log(req.params)
-  if (req.params.format == 'json') {
-    Basket.find({}).populate("items").then(function(baskets){
-  });
-    res.render('index.hbs');
-  } else {
-    res.render('index.hbs');
-  }
-});
+app.get('/createBasket', fillBasket);
+
+// app.get("/:format?", function(req, res, next){
+//   console.log(req.params)
+//   if (req.params.format == 'json') {
+//     Basket.find({}).populate("items").then(function(baskets){
+//   });
+//     res.render('index.hbs');
+//   } else {
+//     res.render('index.hbs');
+//   }
+// });
 
 app.listen(3000, function(){
   console.log('Listening on port 3000');
