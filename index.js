@@ -16,6 +16,7 @@ var methodOverride = require('method-override')
 
 var usersController = require('./controllers/usersController')
 var basketController = require('./controllers/basketController')
+var itemController = require('./controllers/itemController')
 var fillBasket = require('./controllers/fillBasket')
 app.set('view engine', 'hbs');
 
@@ -58,6 +59,8 @@ app.get('/secret', usersController.getSecret);
 app.get('/baskets', basketController.getBaskets);
 
 app.get('/createBasket', fillBasket);
+
+app.get('/amazonCall', itemController.amazonCall)
 
 // app.get("/:format?", function(req, res, next){
 //   console.log(req.params)
