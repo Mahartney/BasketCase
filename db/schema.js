@@ -20,7 +20,7 @@ var BasketSchema = new Schema({
     value: Number,
     created_on: String,
     liked: Boolean,
-    items: [{type: ObjectId, ref:" Item"}]
+    items: [{type: ObjectId, ref:"Item"}]
   });
 
 var BasketModel = mongoose.model("Basket", BasketSchema)

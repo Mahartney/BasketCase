@@ -16,7 +16,7 @@ var methodOverride = require('method-override')
 var usersController = require('./controllers/usersController')
 app.set('view engine', 'hbs');
 
-mongoose.connect('mongodb://localhost/basketcase');
+//mongoose.connect('mongodb://localhost/basketcase');
 
 app.use(express.static(path.join(__dirname, '/public')));
 app.use(bodyParser.json());
@@ -50,8 +50,8 @@ app.get('/secret', usersController.getSecret);
 
 app.get("/:format?", function(req, res, next){
   if (req.params.format == '.json') {
-    Basket.find({}).populate("items").then(function(baskets){
-      res.json(baskets);
+    Item.find({}).then(function(items){
+      res.json(items);
     })
   } else {
     res.render('index.hbs');
