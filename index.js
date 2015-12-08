@@ -13,10 +13,12 @@ var flash = require('connect-flash');
 var cookieParser = require('cookie-parser');
 var session      = require('express-session');
 var methodOverride = require('method-override')
-var usersController = require('./controllers/usersController')
-app.set('view engine', 'hbs');
 
-//mongoose.connect('mongodb://localhost/basketcase');
+var usersController = require('./controllers/usersController')
+var basketController = require('./controllers/basketController')
+var itemController = require('./controllers/itemController')
+var fillBasket = require('./controllers/fillBasket')
+app.set('view engine', 'hbs');
 
 app.use(express.static(path.join(__dirname, '/public')));
 app.use(bodyParser.json());
@@ -57,6 +59,13 @@ app.get("/:format?", function(req, res, next){
     res.render('index.hbs');
   }
 });
+
+app.get('/baskets', basketController.getBaskets);
+
+app.get('/createBasket', fillBasket);
+
+app.get('/amazonCall', itemController.amazonCall)
+
 
 app.listen(3000, function(){
   console.log('Listening on port 3000');
