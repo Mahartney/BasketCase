@@ -16,5 +16,17 @@ BasketView.prototype = {
     var html = $("<div>");
     html.append("<h3>This is a basket</h3>");
     return(html);
+  },
+
+  create: function(){
+    $('.shop').on('click', function(evt){
+      evt.preventdefault();
+      var data = {
+        // user: currentUser,
+        budget: this.value()
+      }
+      self.basket.create(data);
+
+    })
   }
 };

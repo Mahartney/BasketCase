@@ -53,9 +53,8 @@ app.get('/login', usersController.getLogin);
 app.post('/login', usersController.postLogin);
 app.get('/logout', usersController.getLogout);
 app.get('/secret', usersController.getSecret);
-
 app.get('/baskets', basketController.getBaskets);
-
+app.post('/baskets', basketController.createNewBasket);
 app.get("/:format?", function(req, res, next){
   console.log(req.params)
   if (req.params.format == 'json') {

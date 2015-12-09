@@ -13,6 +13,12 @@ var basketController = {
   Basket.find({}).then(function(baskets){
     res.json(baskets);
   });
+  },
+
+  createNewBasket: function(req, res){
+    Basket.create(req.body).then(function(basket){
+      res.json(basket);
+    })
   }
 }
 

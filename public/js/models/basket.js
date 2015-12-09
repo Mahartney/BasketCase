@@ -23,3 +23,20 @@ Basket.fetch = function(){
     });
   return request;
 };
+
+Basket.prototype = {
+  create: function(basketData){
+    var self = this;
+    var request = $.ajax({
+      url: '/baskets',
+      method: 'post',
+      data: JSON.stringify(basketData),
+      contentType: 'application/json'
+    }).then(
+      function(newBasketInfo) {
+        self.showBasket();
+      }
+    );
+    return request;
+  }
+}
