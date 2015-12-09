@@ -22,7 +22,7 @@ var basketController = {
       //created on: default(?)
       //liked: set to false by default
       //items: []
-      budget: 5,
+      budget: 0,
       value: 0,
       liked: false,
       items: [],

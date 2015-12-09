@@ -50,6 +50,14 @@ app.post('/login', usersController.postLogin);
 app.get('/logout', usersController.getLogout);
 app.get('/secret', usersController.getSecret);
 
+
+
+app.get('/baskets', basketController.getBaskets);
+
+app.get('/createBasket', fillBasket);
+
+app.get('/amazonCall', itemController.amazonCall)
+
 app.get("/:format?", function(req, res, next){
   if (req.params.format == '.json') {
     Item.find({}).then(function(items){
@@ -59,12 +67,6 @@ app.get("/:format?", function(req, res, next){
     res.render('index.hbs');
   }
 });
-
-app.get('/baskets', basketController.getBaskets);
-
-app.get('/createBasket', fillBasket);
-
-app.get('/amazonCall', itemController.amazonCall)
 
 
 app.listen(3000, function(){
