@@ -18,15 +18,4 @@ BasketView.prototype = {
     return(html);
   },
 
-  create: function(){
-    $('.shop').on('click', function(evt){
-      evt.preventdefault();
-      var data = {
-        // user: currentUser,
-        budget: this.value()
-      }
-      self.basket.create(data);
-
-    })
   }
-};

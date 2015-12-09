@@ -17,10 +17,11 @@ var ItemSchema = new Schema({
 //define schema for basket
 var BasketSchema = new Schema({
     budget: Number,
+    rnd_budgets: [],
     value: Number,
     created_on: String,
     liked: Boolean,
-    items: [{type: ObjectId, ref:" Item"}]
+    items: [{type: ObjectId, ref:"Item"}]
   });
 
 var BasketModel = mongoose.model("Basket", BasketSchema)
