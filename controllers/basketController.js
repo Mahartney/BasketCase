@@ -29,13 +29,18 @@ var basketController = {
     for (var i = 0; i < numItemsArr.length; i++) {
       shopFor.push(Math.floor(numItemsArr[i]/numItemsSum*budget))
     }
-
+    var basket_id;
+    var myBasket;
     Basket.create(req.body).then(function(basket){
-
+      basket_id = basket.id;
       basket.update({
         rnd_budgets: shopFor
       }).then(function(basket){
         res.json(basket);
+        Basket.findById(basket_id, function(err, doc){
+          myBasket = doc;
+        })
+          console.log(myBasket)
 
       })
     })
