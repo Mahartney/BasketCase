@@ -16,7 +16,6 @@ var basketController = {
   },
 
   createBasket: function(req, res){
-
     var shopFor =[]
     var budget = req.body.budget;
     var numItems = Math.floor(Math.random()*5)+1; //determines number of items to shop for
@@ -46,6 +45,7 @@ var basketController = {
       })
     })
   }
+
 }
 
 

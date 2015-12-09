@@ -16,15 +16,14 @@ var opHelper = new OperationHelper({
   assocId: env.assocId,
 });
 
-// ASIN no price "B018W4GC34"
-var APICall = function(res){
+var APICall = function(res, maxPrice){
   opHelper.execute('ItemSearch', {
     'SearchIndex': 'All',
-    'Keywords': '*',
+    'Keywords': randomKeyword(),
+    'MaximumPrice': maxPrice,
+    'MinimumPrice': maxPrice - 100,
     'ResponseGroup': 'ItemAttributes,Images,Offers,OfferFull,OfferSummary',
-    'MinimumPrice': 2286,
-    'MaximumPrice': 2324,
-    'MerchandID': 'All'
+    'MerchantID': 'All'
   }, function(err, results) {
     console.log("error: " + err);
     console.log("the next line is results: ")
@@ -55,6 +54,14 @@ var APICall = function(res){
 }
 //
 
+var randomKeyword = function(){
+  var keywordLibrary = ['book', 'screw', 'baseball', 'orange', 'jello', 'nuclear'];
+  var keyword = keywordLibrary[Math.floor(Math.random() * keywordLibrary.length)];
+  return keyword;
+}
+
+//
+
 
 function error(response, message){
   response.status(500);
@@ -76,11 +83,7 @@ var itemController = {
   amazonCall: function(req, res){
     // var qwer = APICall();
     // console.log("this is what qwer is " + qwer);
-
-    var getItem = APICall(res);
-
-    //console.log(getItem)
-
+    APICall(res, 2500);
   }
 
 
