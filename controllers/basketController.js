@@ -16,6 +16,19 @@ var basketController = {
   },
 
   createBasket: function(req, res){
+
+    var myBasket = new Basket({
+      //budget: initialize to 0
+      //value: initialize to 0
+      //created on: default(?)
+      //liked: set to false by default
+      //items: []
+      budget: 0,
+      value: 0,
+      liked: false,
+      items: []
+    })
+
     var shopFor =[]
     var budget = req.body.budget;
     var numItems = Math.floor(Math.random()*5)+1; //determines number of items to shop for
@@ -40,6 +53,7 @@ var basketController = {
           var basket = doc;
 
         })
+
 
       })
     })
