@@ -3,6 +3,7 @@ var app = express();
 var Basket = require("../models/basket");
 var Item = require("../models/item");
 var basketController = require("./basketController")
+var env = require("../env.js")
 // var apac = require("../apac")
 
 // apac file
@@ -10,9 +11,9 @@ var util = require('util');
 OperationHelper = require('../node_modules/apac').OperationHelper;
 
 var opHelper = new OperationHelper({
-  awsId: "AKIAJHL2YSB3NNWOM2KQ",
-  awsSecret: "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",
-  assocId: "testwebsit056-20"
+  awsId: env.awsId,
+  awsSecret: env.awsSecret,
+  assocId: env.assocId
 });
 
 // ASIN no price "B018W4GC34"

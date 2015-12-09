@@ -1,6 +1,8 @@
 <!doctype html>
 <html>
   <head>
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
     <link rel="stylesheet" type="text/css" href="./style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="./js/models/basket.js"></script>
@@ -10,19 +12,25 @@
     <script src="./script.js"></script>
   </head>
   <body>
+    <div class="container">
     <header>
-      <h1>BasketCase</h1>
-      <ul>
+      <nav>
+        <div class="nav-wrapper">
+          <a href="#" class="brand-logo">BasketCase</a>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
             {{#if currentUser}}
-              <li><a href="/logout">Logout {{currentUser.local.email}}</a></li>
-              <li><a href="/secret"> secret page </a></li>
+            <li><a href="/logout">Logout {{currentUser.local.email}}</a></li>
+            <li><a href="/secret">My Baskets</a></li>
             {{else}}
-              <li><a href="/login">Login</a></li>
-              <li><a href="/signup">Signup</a></li>
+            <li><a href="/login">Login</a></li>
+            <li><a href="/signup">Signup</a></li>
             {{/if}}
           </ul>
+        </div>
+      </nav>
     </header>
    {{{body}}}
     <div class="baskets"></div>
+  </div>
   </body>
 </html>

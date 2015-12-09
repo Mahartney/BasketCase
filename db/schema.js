@@ -17,6 +17,7 @@ var ItemSchema = new Schema({
 //define schema for basket
 var BasketSchema = new Schema({
     budget: Number,
+    rnd_budgets: [],
     value: Number,
     created_on: String,
     liked: Boolean,

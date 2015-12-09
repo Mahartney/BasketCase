@@ -16,5 +16,6 @@ BasketView.prototype = {
     var html = $("<div>");
     html.append("<h3>This is a basket</h3>");
     return(html);
+  },
+
   }
-};
