@@ -5,7 +5,7 @@ var path = require('path');
 var apac = require('apac');
 
 var Basket = require("./models/basket");
-var Song = require("./models/item");
+var Item = require("./models/item");
 
 var mongoose = require('mongoose');
 var passport = require('passport');
@@ -16,9 +16,9 @@ var methodOverride = require('method-override')
 
 var usersController = require('./controllers/usersController')
 var basketController = require('./controllers/basketController')
+var itemController = require('./controllers/itemController')
+var fillBasket = require('./controllers/fillBasket')
 app.set('view engine', 'hbs');
-
-// mongoose.connect('mongodb://localhost/basketcase');
 
 app.use(express.static(path.join(__dirname, '/public')));
 app.use(bodyParser.json());
@@ -36,10 +36,6 @@ app.use(function(req, res, next){
   next();
 });
 
-app.get('/', function(req, res){
-  res.render('index');
-});
-
 function authenticatedUser(req, res, next){
   if(req.isAuthenticated()){
     return next()
@@ -54,20 +50,26 @@ app.post('/login', usersController.postLogin);
 app.get('/logout', usersController.getLogout);
 app.get('/secret', usersController.getSecret);
 
+
+
 app.get('/baskets', basketController.getBaskets);
 app.post('/baskets', basketController.createBasket);
 // app.put('/basket/:id', basketController.fillBasket);
 
+app.get('/createBasket', fillBasket);
+
+app.get('/amazonCall', itemController.amazonCall)
+
 app.get("/:format?", function(req, res, next){
-  console.log(req.params)
-  if (req.params.format == 'json') {
-    Basket.find({}).populate("items").then(function(baskets){
-  });
-    res.render('index.hbs');
+  if (req.params.format == '.json') {
+    Item.find({}).then(function(items){
+      res.json(items);
+    })
   } else {
     res.render('index.hbs');
   }
 });
+
 
 app.listen(3000, function(){
   console.log('Listening on port 3000');

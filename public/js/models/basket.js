@@ -7,36 +7,46 @@ var Basket= function(info){
   this.items = info.items
 };
 
+var Item = function(info){
+  this.name = info.name;
+  this.price = info.price;
+  this.thumbnail = info.thumbnail;
+  this.image = info.image;
+  this.description = info.description;
+}
+
 Basket.fetch = function(){
-  var request = $.getJSON("http://localhost:3000/")
+  var request = $.getJSON("http://localhost:3000/.json")
   .then(function(response) {
-    console.log(response)
     var baskets = [];
     for(var i = 0; i < response.length; i++){
       baskets.push(new Basket(response[i]));
     }
-    return baskets;
     console.log(baskets)
+    return baskets;
     })
   .fail(function(response){
-      console.log(response);
+      console.log("2");
     });
   return request;
 };
 
-Basket.prototype = {
-  create: function(basketData){
-    var self = this;
-    var request = $.ajax({
-      url: '/baskets',
-      method: 'post',
-      data: JSON.stringify(basketData),
-      contentType: 'application/json'
-    }).then(
-      function(newBasketInfo) {
-        self.showBasket();
-      }
-    );
-    return request;
-  }
+popMostRecent = function(){
+  var request = $.getJSON("http://localhost:3000/.json")
+  .then(function(response) {
+    console.log(response);
+    var items = [];
+    for(var i = 0; i < response.length; i++){
+      items.push(new Item(response[i]));
+    }
+    $(".mostRecent").empty();
+    for (var i = 0; i < items.length; i++) {
+      $(".mostRecent").append("<div>"+items[i].description+"</div>")
+    };
+    })
+  .fail(function(response){
+      console.log("2");
+    });
+  return request;
+
 }
