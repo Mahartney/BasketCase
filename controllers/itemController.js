@@ -16,7 +16,11 @@ var opHelper = new OperationHelper({
   assocId: env.assocId,
 });
 
+<<<<<<< HEAD
 var APICall = function(res, maxPrice){
+=======
+var APICall = function(res){
+>>>>>>> 1d2ff094dddaadd696225ecfc9785ce5b40f0b45
   opHelper.execute('ItemSearch', {
     'SearchIndex': 'All',
     'Keywords': randomKeyword(),
@@ -47,9 +51,9 @@ var APICall = function(res, maxPrice){
     newItem.name = item["ItemAttributes"][0]["Title"][0]
     newItem.thumbnail = item["SmallImage"][0]["URL"][0]
     newItem.image = item["MediumImage"][0]["URL"][0]
+    newItem.amazonUrl = item["ItemLinks"][0]["ItemLink"][0]["URL"][0]
     console.log("results: "+ newItem)
-    return res.json(newItem);
-    //return res.json(results);
+    return newItem;
   });
 }
 //
@@ -59,8 +63,6 @@ var randomKeyword = function(){
   var keyword = keywordLibrary[Math.floor(Math.random() * keywordLibrary.length)];
   return keyword;
 }
-
-//
 
 
 function error(response, message){
@@ -80,12 +82,23 @@ var itemController = {
     item.save();
     return item;
   },
-  amazonCall: function(req, res){
-    // var qwer = APICall();
-    // console.log("this is what qwer is " + qwer);
-    APICall(res, 2500);
-  }
+  amazonCall: function(newBasket){
+    console.log(newBasket)
+    var i = 0
+    pizza = true
+    while(pizza){
+      if (newBasket.items.length == newBasket.rnd_budgets.length) {
+        pizza = false;
+        break
+      }
+      while(i < newBasket.rnd_budgets.length) {
+        newBasket.items.push(APICall(newBasket.rnd_budgets[i]))
+        i++
+        }
+      console.log("Hello")
+    }
 
+  }//.next(DOM MANIPULATION)
 
 }
 
