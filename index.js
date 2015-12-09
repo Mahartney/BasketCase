@@ -50,8 +50,6 @@ app.post('/login', usersController.postLogin);
 app.get('/logout', usersController.getLogout);
 app.get('/secret', usersController.getSecret);
 
-
-
 app.get('/baskets', basketController.getBaskets);
 app.post('/baskets', basketController.createBasket);
 // app.put('/basket/:id', basketController.fillBasket);
