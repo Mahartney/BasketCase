@@ -44,7 +44,7 @@ var APICall = function(res){
     console.log(findItem)
 
     var item = results["ItemSearchResponse"]["Items"][0]["Item"][findItem]
-ls    newItem.price = Number(item["Offers"][0]["Offer"][0]["OfferListing"][0]["Price"][0]["Amount"][0])
+    newItem.price = Number(item["Offers"][0]["Offer"][0]["OfferListing"][0]["Price"][0]["Amount"][0])
     newItem.name = item["ItemAttributes"][0]["Title"][0]
     newItem.thumbnail = item["SmallImage"][0]["URL"][0]
     newItem.image = item["MediumImage"][0]["URL"][0]
