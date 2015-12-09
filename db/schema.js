@@ -11,7 +11,7 @@ var ItemSchema = new Schema({
     price: Number,
     thumbnail: String,
     image: String,
-    description: String,
+    amazonUrl: String,
   });
 
 //define schema for basket
