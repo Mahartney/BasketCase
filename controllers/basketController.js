@@ -25,7 +25,7 @@ var basketController = {
       budget: 0,
       value: 0,
       liked: false,
-      items: [],
+      items: []
     })
 
     myBasket.save();
