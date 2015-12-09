@@ -16,7 +16,6 @@ var opHelper = new OperationHelper({
   assocId: env.assocId,
 });
 
-// ASIN no price "B018W4GC34"
 var APICall = function(res){
   opHelper.execute('ItemSearch', {
     'SearchIndex': 'All',
@@ -50,12 +49,10 @@ var APICall = function(res){
     newItem.image = item["MediumImage"][0]["URL"][0]
     newItem.amazonUrl = item["ItemLinks"][0]["ItemLink"][0]["URL"][0]
     console.log("results: "+ newItem)
-    //return newItem;
-    return res.json(results);
+    return newItem;
+    //return res.json(results);
   });
 }
-//
-
 
 function error(response, message){
   response.status(500);
@@ -74,15 +71,24 @@ var itemController = {
     item.save();
     return item;
   },
-  amazonCall: function(req, res){
-    // var qwer = APICall();
-    // console.log("this is what qwer is " + qwer);
 
-    var getItem = APICall(res);
+  amazonCall: function(newBasket){
+    console.log(newBasket)
+    var i = 0
+    pizza = true
+    while(pizza){
+      if (newBasket.items.length == newBasket.rnd_budgets.length) {
+        pizza = false;
+        break
+      }
+      while(i < newBasket.rnd_budgets.length) {
+        newBasket.items.push(APICall(newBasket.rnd_budgets[i]))
+        i++
+        }
+      console.log("Hello")
+    }
 
-    console.log(getItem)
-
-  }
+  }//.next(DOM MANIPULATION)
 
 
 }
