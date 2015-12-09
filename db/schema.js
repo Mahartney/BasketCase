@@ -19,7 +19,7 @@ var BasketSchema = new Schema({
     budget: Number,
     rnd_budgets: [],
     value: Number,
-    created_on: String,
+    created_on: { type: Date, required: true, default: Date.now },
     liked: Boolean,
     items: [{type: ObjectId, ref:"Item"}]
   });
