@@ -9,15 +9,19 @@ var util = require('util');
 OperationHelper = require('../node_modules/apac').OperationHelper;
 
 var opHelper = new OperationHelper({
-  awsId:     '',
-  awsSecret: '',
-  assocId:   ''
+  awsId:     'AKIAIREWS3ETNP73H77Q',
+  awsSecret: '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',
+  assocId:   'testwebs0a-20'
 });
 
-var APICall = function(res){
+
+
+var APICall = function(res, maxPrice){
   opHelper.execute('ItemSearch', {
-    'SearchIndex': 'Books',
-    'Keywords': 'harry potter',
+    'SearchIndex': 'All',
+    'Keywords': randomKeyword(),
+    'MaximumPrice': maxPrice,
+    'MinimumPrice': maxPrice - 100,
     'ResponseGroup': 'ItemAttributes,Offers'
   }, function(err, results) {
     console.log("error: " + err);
@@ -26,6 +30,14 @@ var APICall = function(res){
     return res.json(results);
   });
 }
+//
+
+var randomKeyword = function(){
+  var keywordLibrary = ['book', 'screw', 'baseball', 'orange', 'jello', 'nuclear'];
+  var keyword = keywordLibrary[Math.floor(Math.random() * keywordLibrary.length)];
+  return keyword;
+}
+
 //
 
 
@@ -49,7 +61,7 @@ var itemController = {
   amazonCall: function(req, res){
     // var qwer = APICall();
     // console.log("this is what qwer is " + qwer);
-    APICall(res);
+    APICall(res, 2500);
   }
 }
 

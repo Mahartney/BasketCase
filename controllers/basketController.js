@@ -30,7 +30,8 @@ var basketController = {
 
     myBasket.save();
     return myBasket;
-  }
+  },
+
 }
 
 
