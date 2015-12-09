@@ -33,12 +33,12 @@ var APICall = function(res, maxPrice){
     var returnArr = results["ItemSearchResponse"]["Items"][0]["Item"]
 
     for (var i = 0; i < returnArr.length; i++) {
-     if (returnArr[i].hasOwnProperty('Offers')) {
-       if (Number(returnArr[i]["Offers"][0]["TotalOffers"][0])>0) {
-         findItem = i
-         break
-       }
-     }
+      if (returnArr[i].hasOwnProperty('Offers')) {
+        if (Number(returnArr[i]["Offers"][0]["TotalOffers"][0])>0) {
+          findItem = i
+          break
+        }
+      }
     }
     console.log(findItem)
 
@@ -47,9 +47,16 @@ var APICall = function(res, maxPrice){
     newItem.name = item["ItemAttributes"][0]["Title"][0]
     newItem.thumbnail = item["SmallImage"][0]["URL"][0]
     newItem.image = item["MediumImage"][0]["URL"][0]
+<<<<<<< HEAD
     console.log("results: "+ newItem)
     return res.json(newItem);
     //return res.json(results);
+=======
+    newItem.amazonUrl = item["ItemLinks"][0]["ItemLink"][0]["URL"][0]
+    console.log("results: "+ newItem)
+    //return newItem;
+    return res.json(results);
+>>>>>>> 9d2cd8da84b3a46c7666d59d5f5d63141c54aa8a
   });
 }
 //
@@ -83,7 +90,15 @@ var itemController = {
   amazonCall: function(req, res){
     // var qwer = APICall();
     // console.log("this is what qwer is " + qwer);
+<<<<<<< HEAD
     APICall(res, 2500);
+=======
+
+    var getItem = APICall(res);
+
+    console.log(getItem)
+
+>>>>>>> 9d2cd8da84b3a46c7666d59d5f5d63141c54aa8a
   }
 
 
