@@ -1,5 +1,5 @@
 module.exports = {
 awsId: "AKIAIQY2WIEROL5QYNUA",
-awsSecret: "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",
-assocId: "testwebsit056-20"
+awsSecret: "3FFUyjRCGcA6F1kRctguG36Ujv67UZiQOD8eBuJz",
+assocId: "bascas07-20"
 }
