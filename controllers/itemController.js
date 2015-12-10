@@ -25,19 +25,21 @@ var APICall = function(newBasket, i){
     'MaximumPrice': i,
     'MerchandID': 'All'
   }, function(err, results) {
-    console.log("error: " + err);
-    var newItem = itemController.createItem()
-    var findItem = 0
-    var returnArr = results["ItemSearchResponse"]["Items"][0]["Item"]
+        console.log("error: " + err);
+        var newItem = itemController.createItem()
+        var findItem = 0
+        var returnArr = results["ItemSearchResponse"]["Items"][0]["Item"]
 
-    for (var i = 0; i < returnArr.length; i++) {
-      if (returnArr[i].hasOwnProperty('Offers')) {
-        if (Number(returnArr[i]["Offers"][0]["TotalOffers"][0])>0) {
-          findItem = i
-          break
+        for (var i = 0; i < returnArr.length; i++) {
+          if (returnArr[i].hasOwnProperty('Offers')&&returnArr[i].hasOwnProperty('ItemAttributes')&&returnArr[i].hasOwnProperty('SmallImage')&&returnArr[i].hasOwnProperty('MediumImage')&&returnArr[i].hasOwnProperty('ItemLinks')) {
+            if (Number(returnArr[i]["Offers"][0]["TotalOffers"][0])>0) {
+              findItem = i
+              break
+            }
+          }
         }
-      }
-    }
+
+    })
 
     var item = results["ItemSearchResponse"]["Items"][0]["Item"][findItem]
     newItem.price = Number(item["Offers"][0]["Offer"][0]["OfferListing"][0]["Price"][0]["Amount"][0])
@@ -47,12 +49,16 @@ var APICall = function(newBasket, i){
     newItem.amazonUrl = item["ItemLinks"][0]["ItemLink"][0]["URL"][0]
     //console.log("results: "+ newItem)
     newBasket.items.push(newItem);
+
     //return res.json(results);
-    if (newBasket.items.length == newBasket.rnd_budgets.length) {
-      res.redirect("/basket/"+newBasket.id)
+    if (newBasket.rnd_budgets.length == newBasket.items.length) {
+      console.log('hey')
+      console.log(newBasket)
+      //res.render('basket.hbs')
     }
-    console.log(newBasket)
-  });
+    // if (newBasket.items.length == newBasket.rnd_budgets.length){
+    //   res.render("basket", {basket: newBasket});
+    // }
 }
 
 function error(response, message){
@@ -73,11 +79,14 @@ var itemController = {
     return item;
   },
 
-  amazonCall: function(newBasket, callback){
-    console.log(newBasket)
-    for (var i = 0; i < newBasket.rnd_budgets.length; i++) {
-      APICall(newBasket, newBasket.rnd_budgets[i])
-    }
+  amazonCall: function(req, res){
+    Basket.findById(req.params.id).then(function(basket){
+      for(var i=0; i<basket.rnd_budgets.length; i++){
+        console.log('hello')
+          APICall(basket, basket.rnd_budgets[i])
+      }
+    })
+
   }
 
 

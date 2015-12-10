@@ -56,7 +56,7 @@ app.post('/baskets', basketController.createBasket);
 
 app.get('/createBasket', fillBasket);
 
-app.get('/amazonCall', itemController.amazonCall)
+app.get('/baskets/:id', itemController.amazonCall)
 
 app.get("/:format?", function(req, res, next){
   if (req.params.format == '.json') {

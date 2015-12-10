@@ -39,12 +39,11 @@ var basketController = {
       basket.update({
         rnd_budgets: shopFor
       }).then(function(basket){
-        res.json(basket);
         Basket.findById(basket_id, function(err, doc){
 
           var basket = doc;
           // sends basket as parameter to function
-          itemController.amazonCall(basket)
+          res.redirect('/baskets/'+basket.id)
         })
       })
     })

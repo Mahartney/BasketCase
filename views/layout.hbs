@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
     <link rel="stylesheet" type="text/css" href="./style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
     <script src="./js/models/basket.js"></script>
     <script src="./js/models/item.js"></script>
     <script src="./js/views/basketView.js"></script>
@@ -29,8 +30,72 @@
         </div>
       </nav>
     </header>
-   {{{body}}}
-    <div class="baskets"></div>
-  </div>
+      <div class="row valign-wrapper">
+        <div class="col s4 push-s8">
+          <ul class="collapsible" data-collapsible="accordion">
+          <li>
+            <div class="collapsible-header">Most Recent Baskets</div>
+            <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+          </li>
+          <li>
+            <div class="collapsible-header">Liked Baskets</div>
+            <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+          </li>
+        </ul>
+      </div>
+      <div class="col s8 pull-s3">
+         {{{body}}}
+      </div>
+    </div>
+      <div class="row">
+        <div class="divider"></div>
+        <div class="section">
+          <h5>You could buy</h5>
+          <div class="card col s2 item">
+            <div class="card-image waves-effect waves-block waves-light">
+              <img class="activator" src="http://ecx.images-amazon.com/images/I/41pxT0%2BmnGL._SL160_.jpg">
+            </div>
+            <div class="card-content">
+              <span class="card-title activator grey-text text-darken-4 truncate">Columbia Women's Benton Springs Full Zip, Pomegranate, Medium<i class="material-icons right">more_vert</i></span>
+              <p>$25.87</p>
+            </div>
+            <div class="card-reveal">
+              <span class="card-title grey-text text-darken-4"><i class="material-icons right">close</i></span>
+              <p>Columbia Women's Benton Springs Full Zip, Pomegranate, Medium</p>
+              <a href="http://www.amazon.com/Columbia-Womens-Benton-Springs-Pomegranate/dp/tech-data/B00QWGABIC%3FSubscriptionId%3DAKIAJH5RR2UZ4DZC77WA%26tag%3Dbascas07-20%26linkCode%3Dxm2%26camp%3D2025%26creative%3D386001%26creativeASIN%3DB00QWGABIC"> Buy Here</a>
+            </div>
+          </div>
+          <div class="card col s2 item">
+            <div class="card-image waves-effect waves-block waves-light">
+              <img class="activator" src="http://ecx.images-amazon.com/images/I/31SGQ9J9lbL._SL160_.jpg">
+            </div>
+            <div class="card-content">
+              <span class="card-title activator grey-text text-darken-4 truncate">Elegant Comfort 1500 Thread Count Wrinkle & Fade Resistant Egyptian Quality Ultra Soft Luxurious 4-Piece Bed Sheet Set, Queen, White<i class="material-icons right">more_vert</i></span>
+              <p>$25.85</p>
+            </div>
+            <div class="card-reveal">
+              <span class="card-title grey-text text-darken-4"><i class="material-icons right">close</i></span>
+              <p>Elegant Comfort 1500 Thread Count Wrinkle & Fade Resistant Egyptian Quality Ultra Soft Luxurious 4-Piece Bed Sheet Set, Queen, White</p>
+              <a href="http://www.amazon.com/Columbia-Womens-Benton-Springs-Pomegranate/dp/tech-data/B00QWGABIC%3FSubscriptionId%3DAKIAJH5RR2UZ4DZC77WA%26tag%3Dbascas07-20%26linkCode%3Dxm2%26camp%3D2025%26creative%3D386001%26creativeASIN%3DB00QWGABIC"> Buy Here</a>
+            </div>
+          </div>
+          <div class="card col s2 item">
+            <div class="card-image waves-effect waves-block waves-light">
+              <img class="activator" src="http://ecx.images-amazon.com/images/I/41pxT0%2BmnGL._SL160_.jpg">
+            </div>
+            <div class="card-content">
+              <span class="card-title activator grey-text text-darken-4 truncate">Columbia Women's Benton Springs Full Zip, Pomegranate, Medium<i class="material-icons right">more_vert</i></span>
+              <p>$25.87</p>
+            </div>
+            <div class="card-reveal">
+              <span class="card-title grey-text text-darken-4"><i class="material-icons right">close</i></span>
+              <p>Columbia Women's Benton Springs Full Zip, Pomegranate, Medium</p>
+              <a href="http://www.amazon.com/Columbia-Womens-Benton-Springs-Pomegranate/dp/tech-data/B00QWGABIC%3FSubscriptionId%3DAKIAJH5RR2UZ4DZC77WA%26tag%3Dbascas07-20%26linkCode%3Dxm2%26camp%3D2025%26creative%3D386001%26creativeASIN%3DB00QWGABIC"> Buy Here</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
   </body>
 </html>
