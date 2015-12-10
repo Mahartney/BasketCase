@@ -3,7 +3,7 @@ var app = express();
 var Basket = require("../models/basket");
 var Item = require("../models/item");
 var basketController = require("./basketController")
-var env = require("../env") || ""
+// var env = require("../env") || ""
 
 var util = require('util');
 OperationHelper = require('../node_modules/apac').OperationHelper;
