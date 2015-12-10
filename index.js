@@ -17,7 +17,6 @@ var methodOverride = require('method-override')
 var usersController = require('./controllers/usersController')
 var basketController = require('./controllers/basketController')
 var itemController = require('./controllers/itemController')
-var fillBasket = require('./controllers/fillBasket')
 app.set('view engine', 'hbs');
 
 app.use(express.static(path.join(__dirname, '/public')));
@@ -52,8 +51,6 @@ app.get('/secret', usersController.getSecret);
 
 app.get('/baskets', basketController.getBaskets);
 app.post('/baskets', basketController.createBasket);
-
-app.get('/createBasket', fillBasket);
 
 app.get('/baskets/:id', itemController.amazonCall)
 
