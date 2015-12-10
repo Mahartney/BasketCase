@@ -44,11 +44,12 @@ module.exports = function(passport){
               if(err) throw err;
               return done(null, newUser);
             })
+
           }
         })
       })
     }
-  }))
+  ))
 
   //local strategy
 
