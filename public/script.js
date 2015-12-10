@@ -1,10 +1,10 @@
 $(document).ready(function(){
   $('.shop').on('click', function(){
+    $('.bakset').append('<div')
     var data = {
       // user: currentUser,
       budget: this.value
     }
-    console.log(data)
     var request = $.ajax({
       url: '/baskets',
       method: 'post',
@@ -12,14 +12,23 @@ $(document).ready(function(){
       contentType: 'application/json'
     }).then(
       function(res) {
-        console.log('success')
-        console.log(res)
+        return res;
       }, function(res) {
         console.log(res)
       }
     );
-    return request;
+    // return request;
+
+    var display = setInterval(displayItems, 1000);
+
+    var displayItems = function(){
+      var request = $.getJSON('/baskets/:id').then(function(res){
+        $('.section').append('<div>'+res+'</div>')
+      })
+
+    }
   })
+
 
 
 

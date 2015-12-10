@@ -81,11 +81,12 @@ var itemController = {
 
   amazonCall: function(req, res){
     Basket.findById(req.params.id).then(function(basket){
-      for(var i=0; i<basket.rnd_budgets.length; i++){
-        console.log('hello')
-          APICall(basket, basket.rnd_budgets[i])
-      }
+      // for(var i=0; i<basket.rnd_budgets.length; i++){
+      //     APICall(basket, basket.rnd_budgets[i])
+      // }
+      res.json(basket);
     })
+
 
   }
 
