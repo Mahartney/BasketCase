@@ -3,18 +3,19 @@ var app = express();
 var Basket = require("../models/basket");
 var Item = require("../models/item");
 var basketController = require("./basketController")
-
+var env = require('../env.js')
 var util = require('util');
 OperationHelper = require('../node_modules/apac').OperationHelper;
 
 var randomWord = require("./helpers/keyword.js")
 
 
-var opHelper = new OperationHelper({
-  awsId:     process.env.AWS_ID,
-  awsSecret: process.env.AWS_SECRET,
-  assocId:   process.env.ASSOC_ID
-  }
+var opHelper = new OperationHelper(env
+  // {
+  // awsId:     process.env.AWS_ID,
+  // awsSecret: process.env.AWS_SECRET,
+  // assocId:   process.env.ASSOC_ID
+  // }
 );
 
 var APICall = function(newBasket, maxPrice, req, res){
