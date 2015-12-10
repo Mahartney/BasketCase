@@ -51,8 +51,7 @@ app.get('/secret', usersController.getSecret);
 app.get(passport.authenticate('twitter', {
     successRedirect: '/',
     failureRedirect: '/login'
-  });
-);
+  }));
 
 // baskets routing
 app.get('/baskets', basketController.getBaskets);
