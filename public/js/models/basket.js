@@ -16,7 +16,7 @@ var Item = function(info){
 }
 
 popMostRecent = function(){
-  var request = $.getJSON("http://localhost:3000/mostRecent")
+  var request = $.getJSON("/mostRecent")
   .then(function(response) {
     console.log(response);
     var baskets = [];
