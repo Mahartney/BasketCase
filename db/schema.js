@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/basketcase');
+mongoose.connect('mongodb://127.0.0.1:27017/basketcase');
 
 var Schema = mongoose.Schema,
     ObjectId = Schema.Types.ObjectId
