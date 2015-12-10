@@ -11,7 +11,6 @@ $(document).ready(function(){
       data: JSON.stringify(data),
       contentType: 'application/json'
     }).done(function(res){
-
         $.getJSON('/baskets/'+res._id).done(function(res){
           var view = new BasketView(res);
           view.render();
@@ -26,8 +25,4 @@ $(document).ready(function(){
     popMostRecent()
 
     var intervalID = window.setInterval(popMostRecent, 10000)
-
-
-
-
 });
