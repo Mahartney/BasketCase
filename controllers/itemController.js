@@ -4,31 +4,29 @@ var Basket = require("../models/basket");
 var Item = require("../models/item");
 var basketController = require("./basketController")
 var env = require("../env.js")
-// var apac = require("../apac")
 
-// apac file
 var util = require('util');
 OperationHelper = require('../node_modules/apac').OperationHelper;
 
-var opHelper = new OperationHelper({
-  awsId: env.awsId,
-  awsSecret: env.awsSecret,
-  assocId: env.assocId,
-});
+var randomWord = require("../keyword.js")
 
-var APICall = function(newBasket, i){
+
+var opHelper = new OperationHelper(env);
+
+var APICall = function(newBasket, maxPrice){
   opHelper.execute('ItemSearch', {
     'SearchIndex': 'All',
-    'Keywords': '*',
+    'Keywords': randomWord(),
+    'MaximumPrice': maxPrice,
+    'MinimumPrice': maxPrice - 100,
     'ResponseGroup': 'ItemAttributes,Images,Offers,OfferFull,OfferSummary',
-    'MinimumPrice': i-100,
-    'MaximumPrice': i,
-    'MerchandID': 'All'
+    'MerchantID': 'All'
   }, function(err, results) {
         console.log("error: " + err);
         var newItem = itemController.createItem()
         var findItem = 0
         var returnArr = results["ItemSearchResponse"]["Items"][0]["Item"]
+
 
         for (var i = 0; i < returnArr.length; i++) {
           if (returnArr[i].hasOwnProperty('Offers')&&returnArr[i].hasOwnProperty('ItemAttributes')&&returnArr[i].hasOwnProperty('SmallImage')&&returnArr[i].hasOwnProperty('MediumImage')&&returnArr[i].hasOwnProperty('ItemLinks')) {
@@ -51,15 +49,29 @@ var APICall = function(newBasket, i){
     newBasket.items.push(newItem);
 
     //return res.json(results);
-    if (newBasket.rnd_budgets.length == newBasket.items.length) {
-      console.log('hey')
-      console.log(newBasket)
-      //res.render('basket.hbs')
-    }
-    // if (newBasket.items.length == newBasket.rnd_budgets.length){
-    //   res.render("basket", {basket: newBasket});
-    // }
+
+    console.log(newBasket)
+    console.log("new basket id " + newBasket.id)
+
+    Basket.findOneAndUpdate(
+      {_id: newBasket.id},
+      {items: newBasket.items},
+      function(){console.log("this is the callback")}
+    )
+
+    Basket.findById(newBasket.id, function(err,found){
+      console.log("err: " + err);
+      if (found.items.length == found.rnd_budgets.length) {
+        console.log("DO THIS")
+      }
+    })
+
+  });
+  return newBasket;
+
 }
+//
+
 
 function error(response, message){
   response.status(500);
@@ -89,7 +101,6 @@ var itemController = {
 
 
   }
-
 
 }
 
