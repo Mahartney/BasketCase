@@ -52,7 +52,6 @@ app.get('/secret', usersController.getSecret);
 
 app.get('/baskets', basketController.getBaskets);
 app.post('/baskets', basketController.createBasket);
-// app.put('/basket/:id', basketController.fillBasket);
 
 app.get('/createBasket', fillBasket);
 
