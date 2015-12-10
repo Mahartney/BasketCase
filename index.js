@@ -65,6 +65,12 @@ app.get("/:format?", function(req, res, next){
   }
 });
 
+app.get("/auth/twitter").get(passport.authenticate('twitter', {
+  success.redirect: '/',
+  failureRedirect: '/login'
+  }
+))
+
 
 var port = process.env.PORT || 3000;
 app.listen(port, function() {
