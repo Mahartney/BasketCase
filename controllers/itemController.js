@@ -24,44 +24,64 @@ var APICall = function(newBasket, maxPrice, req, res){
     'MerchantID': 'All'
   }, function(err, results) {
         console.log("error: " + err);
-        var newItem = itemController.createItem()
-        var findItem = 0
-        var returnArr = results["ItemSearchResponse"]["Items"][0]["Item"]
+        var newItem = itemController.createItem();
+        var findItem = 0;
 
+        if (results.hasOwnProperty("ItemSearchResponse") && results["ItemSearchResponse"].hasOwnProperty("Items") && results["ItemSearchResponse"]["Items"][0].hasOwnProperty("Item")) {
 
-      for (var i = 0; i < returnArr.length; i++) {
-        if (returnArr[i].hasOwnProperty('Offers')&&returnArr[i].hasOwnProperty('ItemAttributes')&&returnArr[i].hasOwnProperty('SmallImage')&&returnArr[i].hasOwnProperty('MediumImage')&&returnArr[i].hasOwnProperty('ItemLinks')) {
-          if (Number(returnArr[i]["Offers"][0]["TotalOffers"][0])>0) {
-            findItem = i
-            break
+          var returnArr = results["ItemSearchResponse"]["Items"][0]["Item"];
+
+          for (var i = 0; i < returnArr.length; i++) {
+            if (returnArr[i].hasOwnProperty('Offers')&&returnArr[i].hasOwnProperty('ItemAttributes')&&returnArr[i].hasOwnProperty('SmallImage')&&returnArr[i].hasOwnProperty('MediumImage')&&returnArr[i].hasOwnProperty('ItemLinks')) {
+                if (Number(returnArr[i]["Offers"][0]["TotalOffers"][0])>0) {
+                findItem = i
+                break
+              }
+            }
           }
-        }
-      }
 
-    var item = results["ItemSearchResponse"]["Items"][0]["Item"][findItem]
-    newItem.price = Number(item["Offers"][0]["Offer"][0]["OfferListing"][0]["Price"][0]["Amount"][0])
-    newItem.name = item["ItemAttributes"][0]["Title"][0]
-    newItem.thumbnail = item["SmallImage"][0]["URL"][0]
-    newItem.image = item["MediumImage"][0]["URL"][0]
-    newItem.amazonUrl = item["ItemLinks"][0]["ItemLink"][0]["URL"][0]
-    //console.log("results: "+ newItem)
-    newBasket.items.push(newItem);
+        var item = results["ItemSearchResponse"]["Items"][0]["Item"][findItem]
+        newItem.price = Number(item["Offers"][0]["Offer"][0]["OfferListing"][0]["Price"][0]["Amount"][0])
+        newItem.name = item["ItemAttributes"][0]["Title"][0]
+        newItem.thumbnail = item["SmallImage"][0]["URL"][0]
+        newItem.image = item["MediumImage"][0]["URL"][0]
+        newItem.amazonUrl = item["ItemLinks"][0]["ItemLink"][0]["URL"][0]
+        //console.log("results: "+ newItem)
+        newBasket.items.push(newItem);
 
-    //return res.json(results);
+        //return res.json(results);
 
-    console.log(newBasket)
-    console.log("new basket id " + newBasket.id)
-    Basket.findOneAndUpdate(
-     {_id: newBasket.id},
-     {items: newBasket.items},{new: true},
-     function(error, results){
-       console.log("err: " + err);
-       if (results.items.length == results.rnd_budgets.length) {
-         console.log("DO THIS")
-         res.json(results)
-       }
+        console.log(newBasket)
+        console.log("new basket id " + newBasket.id)
+        Basket.findOneAndUpdate(
+         {_id: newBasket.id},
+         {items: newBasket.items},{new: true},
+         function(error, results){
+           console.log("err: " + err);
+           if (results.items.length == results.rnd_budgets.length) {
+             console.log("DO THIS")
+             res.json(results)
+           }
+         }
+       )
+
+     } else {
+       console.log(newBasket.rnd_budgets)
+
+       var newRnd_budget = newBasket.rnd_budgets.pop()
+
+       Basket.findOneAndUpdate(
+         {_id: newBasket.id},
+         {rnd_budgets: newRnd_budget},
+         function(err,res){
+           console.log("Hey: " + err)
+         }
+       )
+      console.log("After: ")
+
+
+
      }
-   )
 
   });
 }
@@ -90,9 +110,9 @@ var itemController = {
 
   amazonCall: function(req, res){
     Basket.findById(req.params.id).then(function(basket){
-      if(basket.items.length !== basket.rnd_budgets.length){
+      if(basket.items.length < basket.rnd_budgets.length){
         for(var i=0; i<basket.rnd_budgets.length; i++){
-            APICall(basket, basket.rnd_budgets[i], req, res)
+            APICall(basket, basket.rnd_budgets[i], req, res, i)
         }
       }else {
         res.json(basket)

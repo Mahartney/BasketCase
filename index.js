@@ -58,16 +58,15 @@ app.get('/createBasket', fillBasket);
 
 app.get('/baskets/:id', itemController.amazonCall)
 
-app.get("/:format?", function(req, res, next){
-  if (req.params.format == '.json') {
-    Item.find({}).then(function(items){
-      res.json(items);
-    })
-  } else {
-    res.render('index.hbs');
-  }
-});
+app.get('/', function(req, res){
+  res.render('index.hbs');
+})
 
+app.get("/mostRecent", function(req, res){
+    Basket.find({items:{$exists: true, $ne:[]}},{},{ sort: { 'created_on' : -1 } }).limit(8).then(function(baskets){
+      res.json(baskets);
+    })
+});
 
 var port = process.env.PORT || 3000;
 app.listen(port, function() {

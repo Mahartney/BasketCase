@@ -10,3 +10,11 @@ img{
 .valign-wrapper{
   height: 20vh;
 }
+
+.thumbnail{
+  margin: 2px;
+  padding: 1px;
+  border: solid 1px gray;
+  width: 3vmax;
+  height: 3vmax;
+}
