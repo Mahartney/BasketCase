@@ -4,3 +4,9 @@
 .item{
   margin-right: 5px;
 }
+img{
+  height: 150px;
+}
+.valign-wrapper{
+  height: 20vh;
+}

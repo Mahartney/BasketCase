@@ -89,10 +89,13 @@ var itemController = {
 
   amazonCall: function(req, res){
     Basket.findById(req.params.id).then(function(basket){
-
+      if(basket.items.length !== basket.rnd_budgets.length){
         for(var i=0; i<basket.rnd_budgets.length; i++){
             APICall(basket, basket.rnd_budgets[i], req, res)
         }
+      }else {
+        res.json(basket)
+      }
     })
 
 

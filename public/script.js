@@ -1,6 +1,6 @@
 $(document).ready(function(){
   $('.shop').on('click', function(){
-    $('.bakset').append('<div')
+    $('.section').remove();
     var data = {
       // user: currentUser,
       budget: this.value
@@ -11,11 +11,11 @@ $(document).ready(function(){
       data: JSON.stringify(data),
       contentType: 'application/json'
     }).done(function(res){
-        console.log(res)
-        console.log(res._id)
+
         $.getJSON('/baskets/'+res._id).done(function(res){
+          var view = new BasketView(res);
+          view.render();
           console.log("success:" + res)
-          alert('hi')
         }).fail(function(res){
           console.log("failure:" + res)
         })
