@@ -12,7 +12,7 @@ OperationHelper = require('../node_modules/apac').OperationHelper;
 var randomWord = require("../keyword.js")
 
 
-var opHelper = new OperationHelper(env || {
+var opHelper = new OperationHelper({
   awsId:     process.env.AWS_ID,
   awsSecret: process.env.AWS_SECRET,
   assocId:   process.env.ASSOC_ID
