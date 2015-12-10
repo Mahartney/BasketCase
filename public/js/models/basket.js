@@ -15,36 +15,27 @@ var Item = function(info){
   this.description = info.description;
 }
 
-Basket.fetch = function(){
-  var request = $.getJSON("http://localhost:3000/.json")
-  .then(function(response) {
-    var baskets = [];
-    for(var i = 0; i < response.length; i++){
-      baskets.push(new Basket(response[i]));
-    }
-    console.log(baskets)
-    return baskets;
-    })
-  .fail(function(response){
-      console.log("2");
-    });
-  return request;
-};
-
 popMostRecent = function(){
-  var request = $.getJSON("http://localhost:3000/.json")
+  var request = $.getJSON("http://localhost:3000/mostRecent")
   .then(function(response) {
     console.log(response);
-    var items = [];
-    for(var i = 0; i < response.length; i++){
-      items.push(new Item(response[i]));
-    }
-    $(".mostRecent").empty();
-    for (var i = 0; i < items.length; i++) {
-      $(".mostRecent").append("<div>"+items[i].description+"</div>")
+    var baskets = [];
+    var html = $(".mostRecent")
+    html.empty();
+    for (var i = 0; i < response.length; i++) {
+      var itemThumbnails = $("<p>");
+      var li = $("<li>");
+      var header = $("<div class ='collapsible-header truncate'>"+ response[i].items[0].name + "</div>");
+      var body = $("<div class ='collapsible-body'>");
+      for (var j = 0; j < response[i].items.length; j++) {
+        itemThumbnails.append("<img class ='thumbnail' src='" + response[i].items[j].thumbnail + "'>")
+      };
+      body.append(itemThumbnails)
+      li.append(header);
+      li.append(body);
+      html.append(li);
     };
-    })
-  .fail(function(response){
+    }).fail(function(response){
       console.log("2");
     });
   return request;
