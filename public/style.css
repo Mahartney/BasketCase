@@ -1,12 +1,28 @@
+@import url(https://fonts.googleapis.com/css?family=Mountains+of+Christmas:700);
+
 .container{
   width: 90%;
 }
 .item{
   margin-right: 5px;
 }
-img{
-  height: 150px;
-}
 .valign-wrapper{
   height: 20vh;
+}
+.brand-logo{
+  font-family: 'Mountains of Christmas', cursive;
+}
+.section{
+  padding: 20px;
+}
+.card{
+  padding: 5px;
+}
+p{
+  font-size: 0.75em;
+}
+footer{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }

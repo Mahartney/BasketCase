@@ -1,6 +1,6 @@
 $(document).ready(function(){
   $('.shop').on('click', function(){
-    $('.section').remove();
+    $('.basket').children().remove();
     var data = {
       // user: currentUser,
       budget: this.value
