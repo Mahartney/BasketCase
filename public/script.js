@@ -1,6 +1,6 @@
 $(document).ready(function(){
   $('.shop').on('click', function(){
-    $('.section').remove();
+    $('.basket').children().remove();
     var data = {
       // user: currentUser,
       budget: this.value
@@ -23,7 +23,9 @@ $(document).ready(function(){
         })
     })
     // return request;
+    popMostRecent()
 
+    var intervalID = window.setInterval(popMostRecent, 10000)
 
 
 
