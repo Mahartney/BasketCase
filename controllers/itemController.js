@@ -3,16 +3,19 @@ var app = express();
 var Basket = require("../models/basket");
 var Item = require("../models/item");
 var basketController = require("./basketController")
-var env = require("../env.js")
 
 var util = require('util');
 OperationHelper = require('../node_modules/apac').OperationHelper;
 
+var randomWord = require("./helpers/keyword.js")
 
-var randomWord = require("../keyword.js")
 
-
-var opHelper = new OperationHelper(env);
+var opHelper = new OperationHelper({
+  awsId:     process.env.AWS_ID,
+  awsSecret: process.env.AWS_SECRET,
+  assocId:   process.env.ASSOC_ID
+  }
+);
 
 var APICall = function(newBasket, maxPrice, req, res){
   opHelper.execute('ItemSearch', {
@@ -48,16 +51,12 @@ var APICall = function(newBasket, maxPrice, req, res){
     newBasket.items.push(newItem);
 
     //return res.json(results);
-
-    console.log(newBasket)
-    console.log("new basket id " + newBasket.id)
     Basket.findOneAndUpdate(
      {_id: newBasket.id},
      {items: newBasket.items},{new: true},
      function(error, results){
        console.log("err: " + err);
        if (results.items.length == results.rnd_budgets.length) {
-         console.log("DO THIS")
          res.json(results)
        }
      }
@@ -66,16 +65,13 @@ var APICall = function(newBasket, maxPrice, req, res){
   });
 }
 
-
-//
-
-
 function error(response, message){
   response.status(500);
   response.json({error: message})
 }
 
 var itemController = {
+
   createItem: function(req, res){
     var item = new Item({
       name: "",
@@ -94,12 +90,10 @@ var itemController = {
         for(var i=0; i<basket.rnd_budgets.length; i++){
             APICall(basket, basket.rnd_budgets[i], req, res)
         }
-      }else {
+      } else {
         res.json(basket)
       }
     })
-
-
   }
 
 }

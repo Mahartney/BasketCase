@@ -2,7 +2,6 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var path = require('path');
-var apac = require('apac');
 
 var Basket = require("./models/basket");
 var Item = require("./models/item");
@@ -17,7 +16,6 @@ var methodOverride = require('method-override')
 var usersController = require('./controllers/usersController')
 var basketController = require('./controllers/basketController')
 var itemController = require('./controllers/itemController')
-var fillBasket = require('./controllers/fillBasket')
 app.set('view engine', 'hbs');
 
 app.use(express.static(path.join(__dirname, '/public')));
@@ -43,6 +41,7 @@ function authenticatedUser(req, res, next){
   res.redirect('/')
 }
 
+// users routing
 app.get('/signup', usersController.getSignup);
 app.post('/signup', usersController.postSignup);
 app.get('/login', usersController.getLogin);
@@ -50,11 +49,9 @@ app.post('/login', usersController.postLogin);
 app.get('/logout', usersController.getLogout);
 app.get('/secret', usersController.getSecret);
 
+// baskets routing
 app.get('/baskets', basketController.getBaskets);
 app.post('/baskets', basketController.createBasket);
-// app.put('/basket/:id', basketController.fillBasket);
-
-app.get('/createBasket', fillBasket);
 
 app.get('/baskets/:id', itemController.amazonCall)
 

@@ -1,4 +1,5 @@
 var basket = require('../models/basket')
+var item = require('../models/item')
 
 describe("a basket", function(){
   it ("should have a collection of items", function(){
