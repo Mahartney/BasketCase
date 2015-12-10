@@ -41,6 +41,7 @@ function authenticatedUser(req, res, next){
   res.redirect('/')
 }
 
+// users routing
 app.get('/signup', usersController.getSignup);
 app.post('/signup', usersController.postSignup);
 app.get('/login', usersController.getLogin);
@@ -48,6 +49,7 @@ app.post('/login', usersController.postLogin);
 app.get('/logout', usersController.getLogout);
 app.get('/secret', usersController.getSecret);
 
+// baskets routing
 app.get('/baskets', basketController.getBaskets);
 app.post('/baskets', basketController.createBasket);
 
