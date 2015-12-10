@@ -48,7 +48,7 @@ app.get('/login', usersController.getLogin);
 app.post('/login', usersController.postLogin);
 app.get('/logout', usersController.getLogout);
 app.get('/secret', usersController.getSecret);
-app.get(passport.authenticate('twitter', {
+app.get('/auth/twitter', passport.authenticate('twitter', {
     successRedirect: '/',
     failureRedirect: '/login'
   }));
