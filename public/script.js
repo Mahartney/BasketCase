@@ -10,24 +10,20 @@ $(document).ready(function(){
       method: 'post',
       data: JSON.stringify(data),
       contentType: 'application/json'
-    }).then(
-      function(res) {
-        return res;
-      }, function(res) {
+    }).done(function(res){
         console.log(res)
-      }
-    );
+        console.log(res._id)
+        $.getJSON('/baskets/'+res._id).done(function(res){
+          console.log("success:" + res)
+          alert('hi')
+        }).fail(function(res){
+          console.log("failure:" + res)
+        })
+
+        })
+    })
     // return request;
 
-    var display = setInterval(displayItems, 1000);
-
-    var displayItems = function(){
-      var request = $.getJSON('/baskets/:id').then(function(res){
-        $('.section').append('<div>'+res+'</div>')
-      })
-
-    }
-  })
 
 
 

@@ -13,7 +13,7 @@ var randomWord = require("../keyword.js")
 
 var opHelper = new OperationHelper(env);
 
-var APICall = function(newBasket, maxPrice){
+var APICall = function(newBasket, maxPrice, req, res){
   opHelper.execute('ItemSearch', {
     'SearchIndex': 'All',
     'Keywords': randomWord(),
@@ -28,16 +28,14 @@ var APICall = function(newBasket, maxPrice){
         var returnArr = results["ItemSearchResponse"]["Items"][0]["Item"]
 
 
-        for (var i = 0; i < returnArr.length; i++) {
-          if (returnArr[i].hasOwnProperty('Offers')&&returnArr[i].hasOwnProperty('ItemAttributes')&&returnArr[i].hasOwnProperty('SmallImage')&&returnArr[i].hasOwnProperty('MediumImage')&&returnArr[i].hasOwnProperty('ItemLinks')) {
-            if (Number(returnArr[i]["Offers"][0]["TotalOffers"][0])>0) {
-              findItem = i
-              break
-            }
+      for (var i = 0; i < returnArr.length; i++) {
+        if (returnArr[i].hasOwnProperty('Offers')&&returnArr[i].hasOwnProperty('ItemAttributes')&&returnArr[i].hasOwnProperty('SmallImage')&&returnArr[i].hasOwnProperty('MediumImage')&&returnArr[i].hasOwnProperty('ItemLinks')) {
+          if (Number(returnArr[i]["Offers"][0]["TotalOffers"][0])>0) {
+            findItem = i
+            break
           }
         }
-
-    })
+      }
 
     var item = results["ItemSearchResponse"]["Items"][0]["Item"][findItem]
     newItem.price = Number(item["Offers"][0]["Offer"][0]["OfferListing"][0]["Price"][0]["Amount"][0])
@@ -52,24 +50,22 @@ var APICall = function(newBasket, maxPrice){
 
     console.log(newBasket)
     console.log("new basket id " + newBasket.id)
-
     Basket.findOneAndUpdate(
-      {_id: newBasket.id},
-      {items: newBasket.items},
-      function(){console.log("this is the callback")}
-    )
-
-    Basket.findById(newBasket.id, function(err,found){
-      console.log("err: " + err);
-      if (found.items.length == found.rnd_budgets.length) {
-        console.log("DO THIS")
-      }
-    })
+     {_id: newBasket.id},
+     {items: newBasket.items},{new: true},
+     function(error, results){
+       console.log("err: " + err);
+       if (results.items.length == results.rnd_budgets.length) {
+         console.log("DO THIS")
+         res.json(results)
+       }
+     }
+   )
 
   });
-  return newBasket;
-
 }
+
+
 //
 
 
@@ -93,10 +89,10 @@ var itemController = {
 
   amazonCall: function(req, res){
     Basket.findById(req.params.id).then(function(basket){
-      // for(var i=0; i<basket.rnd_budgets.length; i++){
-      //     APICall(basket, basket.rnd_budgets[i])
-      // }
-      res.json(basket);
+
+        for(var i=0; i<basket.rnd_budgets.length; i++){
+            APICall(basket, basket.rnd_budgets[i], req, res)
+        }
     })
 
 
