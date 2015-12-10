@@ -21,7 +21,7 @@ var BasketSchema = new Schema({
     value: Number,
     created_on: { type: Date, required: true, default: Date.now },
     liked: Boolean,
-    items: [{type: ObjectId, ref:"Item"}]
+    items: []
   });
 
 var BasketModel = mongoose.model("Basket", BasketSchema)

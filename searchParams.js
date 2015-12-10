@@ -19,12 +19,13 @@
 // this function should return an object
 // should it be an object constructor?
 
-var searchParams = function(itemPrice) {
-  'SearchIndex': 'All',
-  'Keywords': randomKeyword();
-  'MaximumPrice': itemPrice;
-  'MinimumPrice': itemPrice - 100;
-  'ResponseGroup': 'ItemAttributes,Offers'
+var searchParams = function Search(maxPrice){
+  this.SearchIndex = 'All',
+  this.Keywords = 'balls',
+  this.MaximumPrice = maxPrice,
+  this.MinimumPrice = maxPrice - 100,
+  this.ResponseGroup = 'ItemAttributes,Images,Offers,OfferFull,OfferSummary',
+  this.MerchantID = 'All'
 }
 
 var randomKeyword = function(){
@@ -32,3 +33,5 @@ var randomKeyword = function(){
   var keyword = keywordLibrary[Math.floor(Math.random() * keywordLibrary.length)];
   return keyword;
 }
+
+module.exports = searchParams

@@ -10,10 +10,18 @@ function error(response, message){
 }
 
 var basketController = {
+  updateItems: function(basket, newItems){
+    basket_id = basket.id;
+    Basket.findById(basket_id).update({
+      items: newItems
+    });
+    return basket;
+  },
+
   getBaskets: function(req, res){
-  Basket.find({}).then(function(baskets){
-    res.json(baskets);
-  });
+    Basket.find({}).then(function(baskets){
+      res.json(baskets);
+    });
   },
 
   createBasket: function(req, res){
