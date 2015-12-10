@@ -98,7 +98,7 @@ var itemController = {
         for(var i=0; i<basket.rnd_budgets.length; i++){
             APICall(basket, basket.rnd_budgets[i], req, res)
         }
-      }else {
+      } else {
         res.json(basket)
       }
     })

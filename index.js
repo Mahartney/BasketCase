@@ -2,7 +2,6 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var path = require('path');
-var apac = require('apac');
 
 var Basket = require("./models/basket");
 var Item = require("./models/item");
