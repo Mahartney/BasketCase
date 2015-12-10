@@ -3,7 +3,7 @@ var app = express();
 var Basket = require("../models/basket");
 var Item = require("../models/item");
 var basketController = require("./basketController")
-var env = require("../env.js")
+// var env = require("../env.js")
 // var apac = require("../apac")
 
 // apac file
@@ -11,9 +11,9 @@ var util = require('util');
 OperationHelper = require('../node_modules/apac').OperationHelper;
 
 var opHelper = new OperationHelper({
-  awsId: env.awsId,
-  awsSecret: env.awsSecret,
-  assocId: env.assocId,
+  awsId: '',
+  awsSecret: '',
+  assocId: '',
 });
 
 var APICall = function(res, maxPrice){
