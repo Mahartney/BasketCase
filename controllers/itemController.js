@@ -28,7 +28,7 @@ var APICall = function(newBasket, maxPrice){
     var returnArr = results["ItemSearchResponse"]["Items"][0]["Item"]
 
     for (var i = 0; i < returnArr.length; i++) {
-     if (returnArr[i].hasOwnProperty('Offers')) {
+     if (returnArr[i].hasOwnProperty('Offers')&&returnArr[i].hasOwnProperty('ItemAttributes')&&returnArr[i].hasOwnProperty('SmallImage')&&returnArr[i].hasOwnProperty('MediumImage')&&returnArr[i].hasOwnProperty('ItemLinks')) {
        if (Number(returnArr[i]["Offers"][0]["TotalOffers"][0])>0) {
          findItem = i
          break
@@ -45,10 +45,7 @@ var APICall = function(newBasket, maxPrice){
     //console.log("results: "+ newItem)
     newBasket.items.push(newItem);
     //return res.json(results);
-    // if (newBasket.items.length == newBasket.rnd_budgets.length) {
-    //   // res.redirect("/basket/"+newBasket.id)
-    //   console.log("this should redirect to the new basket route")
-    // }
+
     console.log(newBasket)
     console.log("new basket id " + newBasket.id)
 
@@ -58,11 +55,13 @@ var APICall = function(newBasket, maxPrice){
       function(){console.log("this is the callback")}
     )
 
-    // Basket.find(newBasket.id).then(function(basket){
-    //   console.log("success")
-    //   basket.update({items: newBasket.items})
-    // }, function(){console.log("failed")});
-    return newBasket;
+    Basket.findById(newBasket.id, function(err,found){
+      console.log("err: " + err);
+      if (found.items.length == found.rnd_budgets.length) {
+        console.log("DO THIS")
+      }
+    })
+
   });
   return newBasket;
 }
