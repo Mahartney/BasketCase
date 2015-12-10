@@ -23,7 +23,7 @@ ItemModel.remove({}, function(err){
     liked: false,
     items: [],
     method: getItem(){
-      ...
+      
     }
   })
   basket1.save();
