@@ -3,6 +3,7 @@ var app = express();
 var Basket = require("../models/basket");
 var Item = require("../models/item");
 var itemController = require("./itemController")
+var shopFor = require("./helpers/shopFor.js")
 
 function error(response, message){
   response.status(500);
@@ -10,13 +11,6 @@ function error(response, message){
 }
 
 var basketController = {
-  updateItems: function(basket, newItems){
-    basket_id = basket.id;
-    Basket.findById(basket_id).update({
-      items: newItems
-    });
-    return basket;
-  },
 
   getBaskets: function(req, res){
     Basket.find({}).then(function(baskets){
@@ -25,35 +19,32 @@ var basketController = {
   },
 
   createBasket: function(req, res){
-    var shopFor =[]
-    var budget = req.body.budget;
-    var numItems = Math.floor(Math.random()*5)+1; //determines number of items to shop for
-    var numItemsArr = []
-    for (var i = 0; i < numItems; i++) {
-        var itemAmt = Math.floor(Math.random()*100)+1
-        numItemsArr.push(itemAmt)
-    }
-    var numItemsSum = numItemsArr.reduce((a,b) => a+b)
+    // calls the required shopFor in helpers
+    var rnd_budgets = shopFor(req.body.budget)
 
-    for (var i = 0; i < numItemsArr.length; i++) {
-      shopFor.push(Math.floor(numItemsArr[i]/numItemsSum*budget))
-    }
-
+    // creates the basket in db
     var basket_id;
-
     Basket.create(req.body).then(function(basket){
       basket_id = basket.id;
       basket.update({
-        rnd_budgets: shopFor
+        rnd_budgets: rnd_budgets
       }).then(function(basket){
-        Basket.findById(basket_id, function(err, doc){
 
+        // sends basket as parameter to function
+        Basket.findById(basket_id, function(err, doc){
           var basket = doc;
-          // sends basket as parameter to function
           res.redirect('/baskets/'+basket.id)
-        })
-      })
-    })
+        });
+      });
+    });
+  },
+
+  updateItems: function(basket, newItems){
+    basket_id = basket.id;
+    Basket.findById(basket_id).update({
+      items: newItems
+    });
+    return basket;
   }
 
 }
