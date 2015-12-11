@@ -7,9 +7,6 @@
 .item {
   margin-right: 5px;
 }
-.valign-wrapper {
-  height: 20vh;
-}
 .thumbnail{
   margin: 2px;
   padding: 1px;
@@ -35,8 +32,8 @@
 }
 
 main {
-  margin-top: 10vh;
-  margin-bottom: 10vh;
+  margin-top: 5vh;
+  margin-bottom: 5vh;
 }
 
 .card .card-title {
