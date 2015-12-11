@@ -1,3 +1,4 @@
+
 //var TwitterStrategy = require('passport-twitter').Strategy;
 var LocalStrategy = require ('passport-local').Strategy;
 var User = require ('../models/user');
@@ -16,40 +17,41 @@ module.exports = function(passport){
 
   //twitter strategy
 
-//  passport.use('twitter', new TwitterStrategy({
-//      // Here we reference the values in env.js.
-//      consumerKey: process.env.TWITTER_CONSUMER_KEY,
-//      consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
-//      callbackUrl: process.env.TWITTER_CALLBACK_URL
-//    }, function(token, secret, profile, done){
-//      process.nextTick(function(){
-//        User.findOne({'twitter.id': profile.id}, function(err, user){
-//          if(err) return done(err);
+  // passport.use('twitter', new TwitterStrategy({
+  //     // Here we reference the values in env.js.
+  //     consumerKey: process.env.TWITTER_CONSUMER_KEY,
+  //     consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
+  //     callbackUrl: process.env.TWITTER_CALLBACK_URL
+  //   }, function(token, secret, profile, done){
+  //     process.nextTick(function(){
+  //       User.findOne({'twitter.id': profile.id}, function(err, user){
+  //         if(err) return done(err);
+  //
+  //         // If the user already exists, just return that user.
+  //         if(user){
+  //           return done(null, user);
+  //         }
+  //         else {
+  //           // Otherwise, create a brand new user using information passed from Twitter.
+  //           var newUser = new User();
+  //
+  //           // Here we're saving information passed to us from Twitter.
+  //           newUser.twitter.id = profile.id;
+  //           newUser.twitter.token = token;
+  //           newUser.twitter.username = profile.username;
+  //           newUser.twitter.displayName = profile.displayName;
+  //
+  //           newUser.save(function(err){
+  //             if(err) throw err;
+  //             return done(null, newUser);
+  //           })
+  //
+  //         }
+  //       })
+  //     })
+  //   }
+  // ))
 
-          // If the user already exists, just return that user.
-//          if(user){
-//            return done(null, user);
-//          }
-//          else {
-//            // Otherwise, create a brand new user using information passed from Twitter.
-//            var newUser = new User();
-
-            // Here we're saving information passed to us from Twitter.
-//            newUser.twitter.id = profile.id;
-//            newUser.twitter.token = token;
-//            newUser.twitter.username = profile.username;
-//            newUser.twitter.displayName = profile.displayName;
-
-//            newUser.save(function(err){
-//              if(err) throw err;
-//              return done(null, newUser);
-//            })
-
-//          }
-//        })
-//      })
-//    }
-//  ))
 
   //local strategy
 

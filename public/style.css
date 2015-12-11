@@ -1,4 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Mountains+of+Christmas:700);
+*{ box-sizing:border-box; }
 
 .container {
   width: 90%;
@@ -9,8 +10,6 @@
 .valign-wrapper {
   height: 20vh;
 }
-
-
 .thumbnail{
   margin: 2px;
   padding: 1px;
@@ -18,15 +17,17 @@
   width: 3vmax;
   height: 3vmax;
 }
-
 .brand-logo {
   font-family: 'Mountains of Christmas', cursive;
 }
 .section {
   padding: 20px;
 }
-.card {
+.item {
   padding: 5px;
+}
+.card-image{
+  height: 60%;
 }
 
 .alert-danger {
@@ -41,7 +42,6 @@ main {
 p {
   font-size: 0.75em;
 }
-
 
 footer {
   font-size: 1rem;
