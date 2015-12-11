@@ -39,8 +39,8 @@ main {
   margin-bottom: 10vh;
 }
 
-p {
-  font-size: 0.75em;
+.card .card-title {
+  font-size: 1em;
 }
 
 footer {
