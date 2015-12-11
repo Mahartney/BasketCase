@@ -8,13 +8,12 @@ Created by: [Davis Green](https://github.com/Mahartney/), [Negar Kalbasi](https:
 ## Approach
 
 Basket Case was written in Javascript and uses the node-apac Client to query the
-Amazon Product Advertising API. It was intended as a single-page application, though
-not all features have been implemented to make it so (most specifically, user
-authentication still uses route redirects).
+Amazon Product Advertising API. It is intended as a single-page application, though
+not all features have been implemented to make it so.
 
-## Installation Instructions
+## Deployed Site:
 
-Deployed site: https://basket-case.herokuapp.com/
+https://basket-case.herokuapp.com/
 
 ## User Stories:
 

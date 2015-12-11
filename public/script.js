@@ -1,10 +1,11 @@
 $(document).ready(function(){
   var active = false;
-  $('.shop').on('click', function(){
-
+  var clickEvent = function(){
+    $('.shop').unbind()
     var preloadAnimation =  $('<div class="preloader-wrapper big active"><div class="spinner-layer spinner-green-only"><div class="circle-clipper left"><div class="circle"></div></div><div class="gap-patch"><div class="circle"></div></div><div class="circle-clipper right"><div class="circle"></div></div></div></div>')
     $('.basket').children().remove();
     $('.basket').append(preloadAnimation)
+
     var data = {
       //user: currentUser,
       budget: this.value
@@ -18,13 +19,17 @@ $(document).ready(function(){
         $.getJSON('/baskets/'+res._id).done(function(res){
           var view = new BasketView(res);
           view.render();
+          $('.shop').on('click', clickEvent)
           console.log("success:" + res)
         }).fail(function(res){
           console.log("failure:" + res)
         })
 
         })
-    })
+    }
+
+
+  $('.shop').on('click', clickEvent)
     // return request;
     popMostRecent()
 
