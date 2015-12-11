@@ -2,7 +2,7 @@ $(document).ready(function(){
   var active = false;
   $('.shop').on('click', function(){
 
-    var preloadAnimation =  $('<div class="preloader-wrapper big active"><div class="spinner-layer spinner-blue-only"><div class="circle-clipper left"><div class="circle"></div></div><div class="gap-patch"><div class="circle"></div></div><div class="circle-clipper right"><div class="circle"></div></div></div></div>')
+    var preloadAnimation =  $('<div class="preloader-wrapper big active"><div class="spinner-layer spinner-green-only"><div class="circle-clipper left"><div class="circle"></div></div><div class="gap-patch"><div class="circle"></div></div><div class="circle-clipper right"><div class="circle"></div></div></div></div>')
     $('.basket').children().remove();
     $('.basket').append(preloadAnimation)
     var data = {

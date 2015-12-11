@@ -15,7 +15,7 @@ BasketView.prototype = {
   basketTemplate: function(){
     var basket = this.basket;
     var html = $("<div class='section'>");
-    html.append("<h5>You could buy:</h5>");
+    html.append("<h5>For $"+(basket.budget/100).toFixed(2)+" you could buy:</h5>");
     var col_num; //sets column width for materialize based on number of items
       switch (basket.items.length){
         case 1: col_num = "s5"
