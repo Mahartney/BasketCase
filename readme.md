@@ -1,8 +1,17 @@
-{App Name} is a fun, whimsical app to query popular online retailers and return a random possible combination of items*price that will equal a user set dollar figure.
+# Basket Case
 
-User Stories: https://trello.com/b/HlFwrMmM/project-three
+Basket Case is a fun, whimsical app that returns a set of gift suggestions based
+on a user-submitted budget. It queries the Amazon Product Advertising API.
 
-describe item
-  it should have a value
-  it should have a picture
-  it should have a description
+Created by: [Davis Green](https://github.com/Mahartney/), [Negar Kalbasi](https://github.com/noonkay), and [Peter Zhang](https://github.com/pzhang87).
+
+## Approach
+
+## Installation Instructions
+
+Deployed site: https://basket-case.herokuapp.com/
+
+
+## User Stories:
+
+https://trello.com/b/HlFwrMmM/project-three
