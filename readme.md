@@ -8,7 +8,7 @@ Created by: [Davis Green](https://github.com/Mahartney/), [Negar Kalbasi](https:
 ## Approach
 
 Basket Case was written in Javascript and uses the node-apac Client to query the
-Amazon Product Advertising API. It was designed as a single-page application, though
+Amazon Product Advertising API. It was intended as a single-page application, though
 not all features have been implemented to make it so (most specifically, user
 authentication still uses route redirects).
 
