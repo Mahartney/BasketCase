@@ -36,7 +36,15 @@ var usersController = {
 
   getSecret: function(req, res){
     res.render('secret.hbs')
-  }
+  },
+
+  // twitterLogin: function(req, res){
+  //   var authenticate = passport.authenticate('twitter', {
+  //     successRedirect: '/',
+  //     failureRedirect: '/login'
+  //   });
+  //   return authenticate;
+  // }
 }
 
 
