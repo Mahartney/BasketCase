@@ -3,7 +3,6 @@ var app = express();
 var Basket = require("../models/basket");
 var Item = require("../models/item");
 var basketController = require("./basketController")
-var env = require("../env.js")
 var util = require('util');
 var env = require('../env.js')
 OperationHelper = require('../node_modules/apac').OperationHelper;
@@ -18,7 +17,6 @@ var opHelper = new OperationHelper({
   // awsId:     process.env.AWS_ID,
   // awsSecret: process.env.AWS_SECRET,
   // assocId:   process.env.ASSOC_ID
-
   }
 );
 

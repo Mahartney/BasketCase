@@ -29,7 +29,13 @@
 .card-image{
   height: 60%;
 }
+
+.alert-danger {
+  color: red;
+}
+
 main {
+  margin-top: 10vh;
   margin-bottom: 10vh;
 }
 
