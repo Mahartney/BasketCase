@@ -3,33 +3,24 @@ var app = express();
 var Basket = require("../models/basket");
 var Item = require("../models/item");
 var basketController = require("./basketController")
-<<<<<<< HEAD
 var env = require("../env.js")
-=======
-var env = require('../env.js')
->>>>>>> a332c82a1ac4632e63547d4943f517c12f30376e
 var util = require('util');
-var env = require('../env.js')
+// var env = require('../env.js')
 OperationHelper = require('../node_modules/apac').OperationHelper;
 
-<<<<<<< HEAD
-
-var randomWord = require("../keyword.js")
-var opHelper = new OperationHelper(env);
-=======
 var randomWord = require("./helpers/keyword.js")
 
 
 var opHelper = new OperationHelper({
-  awsId:     env.awsId,
-  awsSecret: env.awsSecret,
-  assocId:   env.assocId
-  // awsId:     process.env.AWS_ID,
-  // awsSecret: process.env.AWS_SECRET,
-  // assocId:   process.env.ASSOC_ID
+  // awsId:     env.awsId,
+  // awsSecret: env.awsSecret,
+  // assocId:   env.assocId
+  awsId:     process.env.AWS_ID,
+  awsSecret: process.env.AWS_SECRET,
+  assocId:   process.env.ASSOC_ID
   }
 );
->>>>>>> a332c82a1ac4632e63547d4943f517c12f30376e
+
 
 var APICall = function(newBasket, maxPrice, req, res){
   opHelper.execute('ItemSearch', {
