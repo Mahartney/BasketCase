@@ -50,8 +50,8 @@ app.get('/logout', usersController.getLogout);
 app.get('/secret', usersController.getSecret);
 
 // twitter auth
-app.get('/auth/twitter', usersController.twitterLogin);
-
+// app.get('/auth/twitter', usersController.twitterLogin);
+ 
 // baskets routing
 app.get('/baskets', basketController.getBaskets);
 app.post('/baskets', basketController.createBasket);
