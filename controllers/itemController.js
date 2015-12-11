@@ -58,7 +58,8 @@ var APICall = function(newBasket, maxPrice, req, res){
       newItem.amazonUrl = item["ItemLinks"][0]["ItemLink"][0]["URL"][0]
     } else {
       //Get Item FROM DB
-      newItem = Item.findOne({}).where('price').lt(maxPrice)
+      //newItem = Item.findOne({}).where('price').lt(maxPrice)
+      newItem = Item.find({price:{$lt: maxPrice}},{ sort: { 'price' : -1 } }).limit(1)
     }
     // add Item to DB
     newBasket.items.push(newItem);
@@ -96,6 +97,7 @@ var itemController = {
     Basket.findById(req.params.id).then(function(basket){
       if(basket.items.length !== basket.rnd_budgets.length){
         for(var i=0; i<basket.rnd_budgets.length; i++){
+            console.log("Too Many?")
             APICall(basket, basket.rnd_budgets[i], req, res)
         }
       } else {
