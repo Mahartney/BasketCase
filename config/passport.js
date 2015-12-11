@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 // var TwitterStrategy = require('passport-twitter').Strategy;
+=======
+//var TwitterStrategy = require('passport-twitter').Strategy;
+>>>>>>> 3201afbbef627723c512cf247c4282d99bdf576c
 var LocalStrategy = require ('passport-local').Strategy;
 var User = require ('../models/user');
 
@@ -16,6 +20,7 @@ module.exports = function(passport){
 
   //twitter strategy
 
+<<<<<<< HEAD
   // passport.use('twitter', new TwitterStrategy({
   //     // Here we reference the values in env.js.
   //     consumerKey: process.env.TWITTER_CONSUMER_KEY,
@@ -50,6 +55,7 @@ module.exports = function(passport){
   //     })
   //   }
   // ))
+
 
   //local strategy
 

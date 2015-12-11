@@ -2,6 +2,7 @@ var BasketView = function(basket){
   this.basket = basket;
   this.$el = $("<div class='row'></div>");
   this.render();
+  $('.basket').children().remove();
   $(".basket").append(this.$el);
 };
 
