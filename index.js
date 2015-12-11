@@ -48,10 +48,12 @@ app.get('/login', usersController.getLogin);
 app.post('/login', usersController.postLogin);
 app.get('/logout', usersController.getLogout);
 app.get('/secret', usersController.getSecret);
-// app.get('/auth/twitter', passport.authenticate('twitter', {
-//     successRedirect: '/',
-//     failureRedirect: '/login'
-//   }));
+
+// twitter auth
+app.get('/auth/twitter', passport.authenticate('twitter', {
+    successRedirect: '/',
+    failureRedirect: '/login'
+  }));
 
 // baskets routing
 app.get('/baskets', basketController.getBaskets);
