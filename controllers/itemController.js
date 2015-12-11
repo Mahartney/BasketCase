@@ -11,9 +11,9 @@ var randomWord = require("./helpers/keyword.js")
 
 
 var opHelper = new OperationHelper({
-  awsId:     env.awsId,
-  awsSecret: env.awsSecret,
-  assocId:   env.assocId
+  // awsId:     env.awsId,
+  // awsSecret: env.awsSecret,
+  // assocId:   env.assocId
   awsId:     process.env.AWS_ID,
   awsSecret: process.env.AWS_SECRET,
   assocId:   process.env.ASSOC_ID
