@@ -44,6 +44,7 @@ var usersController = {
       failureRedirect: '/login'
     });
     return authenticate;
+  }
 }
 
 
