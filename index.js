@@ -47,11 +47,11 @@ app.post('/signup', usersController.postSignup);
 app.get('/login', usersController.getLogin);
 app.post('/login', usersController.postLogin);
 app.get('/logout', usersController.getLogout);
-app.get('/secret', usersController.getSecret);
+app.get('/secret', basketController.getMyBaskets);
 
 // twitter auth
 // app.get('/auth/twitter', usersController.twitterLogin);
- 
+
 // baskets routing
 app.get('/baskets', basketController.getBaskets);
 app.post('/baskets', basketController.createBasket);
