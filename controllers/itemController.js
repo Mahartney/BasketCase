@@ -6,7 +6,6 @@ var basketController = require("./basketController")
 var util = require('util');
 var env = require('../env.js')
 OperationHelper = require('../node_modules/apac').OperationHelper;
-
 var randomWord = require("./helpers/keyword.js")
 
 
@@ -30,7 +29,7 @@ var APICall = function(newBasket, maxPrice, req, res){
     'MerchantID': 'All'
   }, function(err, results) {
     var newItem = itemController.createItem();
-    var findItem = 0;
+    var findItem = -1;
     //checks to see if the API call was an error:
     if (results.hasOwnProperty("ItemSearchResponse") &&
     results["ItemSearchResponse"].hasOwnProperty("Items") && results["ItemSearchResponse"]["Items"][0].hasOwnProperty("Item")) {
@@ -39,6 +38,7 @@ var APICall = function(newBasket, maxPrice, req, res){
       for (var i = 0; i < returnArr.length; i++) {
         if(returnArr[i].hasOwnProperty('OfferSummary') &&
         returnArr[i]['OfferSummary'][0].hasOwnProperty('LowestNewPrice') &&
+        returnArr[i]['OfferSummary'][0]['LowestNewPrice'][0].hasOwnProperty('Amount') &&
         returnArr[i].hasOwnProperty('ItemAttributes') &&
         returnArr[i].hasOwnProperty('SmallImage') &&
         returnArr[i].hasOwnProperty('MediumImage') &&
@@ -48,16 +48,21 @@ var APICall = function(newBasket, maxPrice, req, res){
           break
         }
       }
-      //set variable of item to value of valid item from response
-      var item = results["ItemSearchResponse"]["Items"][0]["Item"][findItem]
-      newItem.price = Number(item["OfferSummary"][0]["LowestNewPrice"][0]["Amount"][0])
-      newItem.name = item["ItemAttributes"][0]["Title"][0]
-      newItem.thumbnail = item["SmallImage"][0]["URL"][0]
-      newItem.image = item["MediumImage"][0]["URL"][0]
-      newItem.amazonUrl = item["ItemLinks"][0]["ItemLink"][0]["URL"][0]
+
+        if (findItem == -1) {
+          newItem = Item.find({price:{$lt: maxPrice}},{ sort: { 'price' : -1 } }).limit(1)
+        } else {
+        //set variable of item to value of valid item from response
+        var item = results["ItemSearchResponse"]["Items"][0]["Item"][findItem]
+        newItem.price = Number(item["OfferSummary"][0]["LowestNewPrice"][0]["Amount"][0])
+        newItem.name = item["ItemAttributes"][0]["Title"][0]
+        newItem.thumbnail = item["SmallImage"][0]["URL"][0]
+        newItem.image = item["MediumImage"][0]["URL"][0]
+        newItem.amazonUrl = item["ItemLinks"][0]["ItemLink"][0]["URL"][0]
+      }
+
     } else {
       //Get Item FROM DB
-      //newItem = Item.findOne({}).where('price').lt(maxPrice)
       newItem = Item.find({price:{$lt: maxPrice}},{ sort: { 'price' : -1 } }).limit(1)
     }
     // add Item to DB
