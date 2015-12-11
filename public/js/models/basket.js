@@ -22,17 +22,22 @@ popMostRecent = function(){
     var baskets = [];
     var html = $(".mostRecent")
     html.empty();
-    for (var i = 0; i < response.length; i++) {
 
+    function createCallback( i ){
+      return function(){
+        var view = new BasketView(i);
+        view.render();
+      }
+    }
+
+    for (var i = 0; i < response.length; i++) {
       var thisBasket = response[i]
       var itemThumbnails = $("<p>");
       var li = $("<li>");
       var header = $("<div class ='collapsible-header truncate'>"+ thisBasket.items[0].name + "</div>");
-
-      var body = $("<div class ='collapsible-body'>").click(function(){
-        var view = new BasketView(thisBasket);
-        view.render();
-      });
+      var body = $("<div class ='collapsible-body' id ='" + thisBasket._id + "'>").click(
+        createCallback( thisBasket )
+      );
 
       for (var j = 0; j < thisBasket.items.length; j++) {
         itemThumbnails.append("<img class ='thumbnail' src='" + thisBasket.items[j].thumbnail + "'>")
