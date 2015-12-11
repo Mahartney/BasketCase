@@ -29,7 +29,12 @@
   padding: 5px;
 }
 
+.alert-danger {
+  color: red;
+}
+
 main {
+  margin-top: 10vh;
   margin-bottom: 10vh;
 }
 
