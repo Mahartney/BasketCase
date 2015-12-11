@@ -37,7 +37,8 @@ var APICall = function(newBasket, maxPrice, req, res){
       var returnArr = results["ItemSearchResponse"]["Items"][0]["Item"];
       //Checks to see if the first item return contains all needed properties
       for (var i = 0; i < returnArr.length; i++) {
-        if(returnArr[i].hasOwnProperty('Offers') &&
+        if(returnArr[i].hasOwnProperty('OfferSummary') &&
+        returnArr[i]['OfferSummary'][0].hasOwnProperty('LowestNewPrice') &&
         returnArr[i].hasOwnProperty('ItemAttributes') &&
         returnArr[i].hasOwnProperty('SmallImage') &&
         returnArr[i].hasOwnProperty('MediumImage') &&
