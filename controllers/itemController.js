@@ -29,6 +29,7 @@ var APICall = function(newBasket, maxPrice, req, res){
     'ResponseGroup': 'ItemAttributes,Images,Offers,OfferFull,OfferSummary',
     'MerchantID': 'All'
   }, function(err, results) {
+    console.log(results["ItemSearchResponse"]["Items"][0]["Item"][0]["Offers"])
     var newItem = itemController.createItem();
     var findItem = 0;
     //checks to see if the API call was an error:
