@@ -42,14 +42,14 @@ var APICall = function(newBasket, maxPrice, req, res){
         returnArr[i].hasOwnProperty('SmallImage') &&
         returnArr[i].hasOwnProperty('MediumImage') &&
         returnArr[i].hasOwnProperty('ItemLinks') &&
-        Number(returnArr[i]["Offers"][0]["TotalOffers"][0])>0) {
+        Number(returnArr[i]["OfferSummary"][0]["LowestNewPrice"][0]["Amount"][0])>0) {
           findItem = i
           break
         }
       }
       //set variable of item to value of valid item from response
       var item = results["ItemSearchResponse"]["Items"][0]["Item"][findItem]
-      newItem.price = Number(item["Offers"][0]["Offer"][0]["OfferListing"][0]["Price"][0]["Amount"][0])
+      newItem.price = Number(item["OfferSummary"][0]["LowestNewPrice"][0]["Amount"][0])
       newItem.name = item["ItemAttributes"][0]["Title"][0]
       newItem.thumbnail = item["SmallImage"][0]["URL"][0]
       newItem.image = item["MediumImage"][0]["URL"][0]
