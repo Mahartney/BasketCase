@@ -23,7 +23,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(methodOverride('_method'));
 
-app.use(session({secret: 'Basket Case'}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());

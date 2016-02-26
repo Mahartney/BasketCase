@@ -1,21 +1,24 @@
 var express = require("express");
 var app = express();
+
 var Basket = require("../models/basket");
 var Item = require("../models/item");
+
 var basketController = require("./basketController")
 var util = require('util');
-// var env = require('../env.js')
-OperationHelper = require('../node_modules/apac').OperationHelper;
+var env = require('../env.js')
+
+var OperationHelper = require('../node_modules/apac').OperationHelper;
 var randomWord = require("./helpers/keyword.js")
 
 
 var opHelper = new OperationHelper({
-  // awsId:     env.awsId,
-  // awsSecret: env.awsSecret,
-  // assocId:   env.assocId
-  awsId:     process.env.AWS_ID,
-  awsSecret: process.env.AWS_SECRET,
-  assocId:   process.env.ASSOC_ID
+  awsId:     env.awsId,
+  awsSecret: env.awsSecret,
+  assocId:   env.assocId
+  // awsId:     process.env.AWS_ID,
+  // awsSecret: process.env.AWS_SECRET,
+  // assocId:   process.env.ASSOC_ID
   }
 );
 
@@ -31,23 +34,25 @@ var APICall = function(newBasket, maxPrice, req, res){
     var newItem = itemController.createItem();
     var findItem = -1;
     //checks to see if the API call was an error:
-    if (results.hasOwnProperty("ItemSearchResponse") &&
-    results["ItemSearchResponse"].hasOwnProperty("Items") && results["ItemSearchResponse"]["Items"][0].hasOwnProperty("Item")) {
-      var returnArr = results["ItemSearchResponse"]["Items"][0]["Item"];
-      //Checks to see if the first item return contains all needed properties
-      for (var i = 0; i < returnArr.length; i++) {
-        if(returnArr[i].hasOwnProperty('OfferSummary') &&
-        returnArr[i]['OfferSummary'][0].hasOwnProperty('LowestNewPrice') &&
-        returnArr[i]['OfferSummary'][0]['LowestNewPrice'][0].hasOwnProperty('Amount') &&
-        returnArr[i].hasOwnProperty('ItemAttributes') &&
-        returnArr[i].hasOwnProperty('SmallImage') &&
-        returnArr[i].hasOwnProperty('MediumImage') &&
-        returnArr[i].hasOwnProperty('ItemLinks') &&
-        Number(returnArr[i]["OfferSummary"][0]["LowestNewPrice"][0]["Amount"][0])>0) {
-          findItem = i
-          break
+    if (
+      results.hasOwnProperty("ItemSearchResponse") &&
+      results["ItemSearchResponse"].hasOwnProperty("Items") &&
+      results["ItemSearchResponse"]["Items"][0].hasOwnProperty("Item")) {
+        var returnArr = results["ItemSearchResponse"]["Items"][0]["Item"];
+        //Checks to see if the first item return contains all needed properties
+        for (var i = 0; i < returnArr.length; i++) {
+          if(returnArr[i].hasOwnProperty('OfferSummary') &&
+          returnArr[i]['OfferSummary'][0].hasOwnProperty('LowestNewPrice') &&
+          returnArr[i]['OfferSummary'][0]['LowestNewPrice'][0].hasOwnProperty('Amount') &&
+          returnArr[i].hasOwnProperty('ItemAttributes') &&
+          returnArr[i].hasOwnProperty('SmallImage') &&
+          returnArr[i].hasOwnProperty('MediumImage') &&
+          returnArr[i].hasOwnProperty('ItemLinks') &&
+          Number(returnArr[i]["OfferSummary"][0]["LowestNewPrice"][0]["Amount"][0])>0) {
+            findItem = i
+            break
+          }
         }
-      }
 
         if (findItem == -1) {
           newItem = Item.find({price:{$lt: maxPrice}},{ sort: { 'price' : -1 } }).limit(1)
@@ -60,11 +65,13 @@ var APICall = function(newBasket, maxPrice, req, res){
         newItem.image = item["MediumImage"][0]["URL"][0]
         newItem.amazonUrl = item["ItemLinks"][0]["ItemLink"][0]["URL"][0]
       }
+    }
 
-    } else {
+    else {
       //Get Item FROM DB
       newItem = Item.find({price:{$lt: maxPrice}},{ sort: { 'price' : -1 } }).limit(1)
     }
+
     // add Item to DB
     newBasket.items.push(newItem);
     Basket.findOneAndUpdate(
@@ -78,11 +85,6 @@ var APICall = function(newBasket, maxPrice, req, res){
     })
   })
 }
-
-//function error(response, message){
-//  response.status(500);
-//  response.json({error: message})
-//}
 
 var itemController = {
   createItem: function(req, res){
@@ -101,15 +103,14 @@ var itemController = {
     Basket.findById(req.params.id).then(function(basket){
       if(basket.items.length !== basket.rnd_budgets.length){
         for(var i=0; i<basket.rnd_budgets.length; i++){
-            console.log("Too Many?")
-            APICall(basket, basket.rnd_budgets[i], req, res)
+          APICall(basket, basket.rnd_budgets[i], req, res)
         }
-      } else {
+      }
+      else {
         res.json(basket)
       }
     })
   }
-
 }
 
 module.exports = itemController
