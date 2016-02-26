@@ -48,14 +48,6 @@ var basketController = {
     });
   },
 
-  updateItems: function(basket, newItems){
-    basket_id = basket.id;
-    Basket.findById(basket_id).update({
-      items: newItems
-    });
-    return basket;
-  },
-
   getMyBaskets: function(req, res){
     Basket.find({owner: req.user.local.email}).then(function(baskets){
       res.json(baskets)
