@@ -11,7 +11,6 @@ var env = require('../env.js')
 var OperationHelper = require('../node_modules/apac').OperationHelper;
 var randomWord = require("./helpers/keyword.js")
 
-
 var opHelper = new OperationHelper({
   awsId:     env.awsId,
   awsSecret: env.awsSecret,
@@ -41,31 +40,33 @@ var APICall = function(newBasket, maxPrice, req, res){
         var returnArr = results["ItemSearchResponse"]["Items"][0]["Item"];
         //Checks to see if the first item return contains all needed properties
         for (var i = 0; i < returnArr.length; i++) {
-          if(returnArr[i].hasOwnProperty('OfferSummary') &&
-          returnArr[i]['OfferSummary'][0].hasOwnProperty('LowestNewPrice') &&
-          returnArr[i]['OfferSummary'][0]['LowestNewPrice'][0].hasOwnProperty('Amount') &&
-          returnArr[i].hasOwnProperty('ItemAttributes') &&
-          returnArr[i].hasOwnProperty('SmallImage') &&
-          returnArr[i].hasOwnProperty('MediumImage') &&
-          returnArr[i].hasOwnProperty('ItemLinks') &&
-          Number(returnArr[i]["OfferSummary"][0]["LowestNewPrice"][0]["Amount"][0])>0) {
-            findItem = i
-            break
+          if(
+            returnArr[i].hasOwnProperty('OfferSummary') &&
+            returnArr[i]['OfferSummary'][0].hasOwnProperty('LowestNewPrice') &&
+            returnArr[i]['OfferSummary'][0]['LowestNewPrice'][0].hasOwnProperty('Amount') &&
+            returnArr[i].hasOwnProperty('ItemAttributes') &&
+            returnArr[i].hasOwnProperty('SmallImage') &&
+            returnArr[i].hasOwnProperty('MediumImage') &&
+            returnArr[i].hasOwnProperty('ItemLinks') &&
+            Number(returnArr[i]["OfferSummary"][0]["LowestNewPrice"][0]["Amount"][0])>0) {
+              findItem = i
+              break
+            }
           }
-        }
 
         if (findItem == -1) {
           newItem = Item.find({price:{$lt: maxPrice}},{ sort: { 'price' : -1 } }).limit(1)
-        } else {
+        }
+        else {
         //set variable of item to value of valid item from response
-        var item = results["ItemSearchResponse"]["Items"][0]["Item"][findItem]
-        newItem.price = Number(item["OfferSummary"][0]["LowestNewPrice"][0]["Amount"][0])
-        newItem.name = item["ItemAttributes"][0]["Title"][0]
-        newItem.thumbnail = item["SmallImage"][0]["URL"][0]
-        newItem.image = item["MediumImage"][0]["URL"][0]
-        newItem.amazonUrl = item["ItemLinks"][0]["ItemLink"][0]["URL"][0]
+          var item = results["ItemSearchResponse"]["Items"][0]["Item"][findItem]
+          newItem.price = Number(item["OfferSummary"][0]["LowestNewPrice"][0]["Amount"][0])
+          newItem.name = item["ItemAttributes"][0]["Title"][0]
+          newItem.thumbnail = item["SmallImage"][0]["URL"][0]
+          newItem.image = item["MediumImage"][0]["URL"][0]
+          newItem.amazonUrl = item["ItemLinks"][0]["ItemLink"][0]["URL"][0]
+        }
       }
-    }
 
     else {
       //Get Item FROM DB

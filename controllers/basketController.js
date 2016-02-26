@@ -22,9 +22,12 @@ var basketController = {
   createBasket: function(req, res){
     // calls the required shopFor in helpers
     var rnd_budgets = shopFor(req.body.budget)
+
+    // currentUser?
     if (req.user){
       var user = req.user.local.email
-    }else {
+    }
+    else {
       var user = "anon"
     }
     // creates the basket in db
@@ -36,7 +39,7 @@ var basketController = {
         rnd_budgets: rnd_budgets
       }).then(function(basket){
 
-        // sends basket as parameter to function
+        // the redirect actually makes an AJAX call to populate the basket via the items controller
         Basket.findById(basket_id, function(err, doc){
           var basket = doc;
           res.redirect('/baskets/'+basket.id)
@@ -55,7 +58,6 @@ var basketController = {
 
   getMyBaskets: function(req, res){
     Basket.find({owner: req.user.local.email}).then(function(baskets){
-      // res.render('secret', {baskets: baskets});
       res.json(baskets)
     });
   }
